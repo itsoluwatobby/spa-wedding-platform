@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Heart, Star, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const useIntersectionObserver = (options = {}) => {
@@ -21,7 +21,7 @@ const useIntersectionObserver = (options = {}) => {
     return () => observer.disconnect();
   }, [hasAnimated]);
 
-  return [elementRef, isVisible];
+  return { elementRef, isVisible };
 };
 
 const Story = () => {
@@ -29,8 +29,8 @@ const Story = () => {
   const [isAutoScrolling, setIsAutoScrolling] = React.useState(true);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
-  const [titleRef, titleVisible] = useIntersectionObserver();
-  const [quoteRef, quoteVisible] = useIntersectionObserver();
+  const { elementRef: titleRef, isVisible: titleVisible } = useIntersectionObserver();
+  const { elementRef: quoteRef, isVisible: quoteVisible } = useIntersectionObserver();
 
   const milestones = [
     {
@@ -66,7 +66,7 @@ const Story = () => {
     return () => clearInterval(interval);
   }, [isAutoScrolling, milestones.length]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
       const cardWidth = container.children[0]?.clientWidth || 0;
@@ -110,13 +110,13 @@ const Story = () => {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute left-6 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute right-6 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -124,7 +124,7 @@ const Story = () => {
           {/* Scrollable Container */}
           <div 
             ref={scrollContainerRef}
-            className="flex gap-8 overflow-x-hidden scroll-smooth snap-x snap-mandatory scrollbar-hide"
+            className="flex gap-8 overflow-x-hidden scroll-smooth py-5 snap-x snap-mandatory scrollbar-hide"
             onMouseEnter={() => setIsAutoScrolling(false)}
             onMouseLeave={() => setIsAutoScrolling(true)}
           >
@@ -136,7 +136,7 @@ const Story = () => {
               return (
                 <div
                   key={`${originalIndex}-${Math.floor(index / milestones.length)}`}
-                  className={`flex-shrink-0 w-full md:w-[640px] bg-white rounded-2xl p-8 md:p-12 shadow-lg hover:shadow-xl transition-all duration-700 text-center group hover:-translate-y-2 transform snap-center ${
+                  className={`flex-shrink-0 w-[92%] md:w-[640px] bg-white rounded-2xl p-8 md:p-12 shadow-lg hover:shadow-xl transition-all duration-700 text-center group hover:-translate-y-2 transform snap-center ${
                     isActive ? 'ring-2 ring-yellow-400 scale-105' : ''
                   }`}
                 >

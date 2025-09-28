@@ -1,22 +1,72 @@
 import React, { useState } from 'react';
-import { Send, Heart, User, Phone, Users, MessageSquare } from 'lucide-react';
+import { Send, Heart, User, Phone, Users, MessageSquare, LoaderIcon } from 'lucide-react';
+import { sanitizeEntries } from '../utils/helpers';
+import { toast } from 'react-toastify';
+
+const initAppState = { isLoading: false, error: '' };
+
+const initFormData = {
+  name: '',
+  phone: '',
+  guests: '1',
+  message: '',
+  attending: ''
+};
 
 const RSVP = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    guests: '1',
-    message: '',
-    attending: ''
-  });
+  const [appState, setAppState] = useState<typeof initAppState>(initAppState);
+  const [formData, setFormData] = useState(initFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [printIv, setPrintIv] = useState<Toggle>('CLOSE')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { isLoading } = appState;
+
+  const { message, ...others } = formData;
+  const canSubmit = [...Object.values(others)].every(Boolean);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log('RSVP submitted:', formData);
-    setIsSubmitted(true);
-  };
+    if (isLoading || !canSubmit) return;
+
+    setAppState(prev => ({ ...prev, isLoading: true }));
+    try {
+      // const apiUrl = import.meta.env.VITE_CONNECTION_URL
+      const date = new Intl.DateTimeFormat('en-us', {
+        dateStyle: 'medium'
+      }).format(new Date())
+      let newEntry = {
+        Date: date,
+        Name: formData.name,
+        "Phone number": formData.phone,
+        "Will you be attending": formData.attending,
+        "Number of guests": formData.guests,
+        // "What will you be Attending": isAttendingType === initInputValue.isAttendingType ? 'All Events' : isAttendingType,
+        Message: formData.message
+      };
+      newEntry = sanitizeEntries(newEntry);
+      const res = await fetch('https://api.sheetbest.com/sheets/d298816a-069e-493e-9146-529dad3759db', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newEntry)
+      })
+      if (res.ok) {
+        // setPrintIv('OPEN')
+        toast.success('Response recorded, Please print your Invitation Card')
+        setFormData(initFormData)
+      }
+    }
+    catch (error) {
+      // setPrintIv('OPEN')
+      setAppState(prev => ({ ...prev, error: '' }));
+      toast.error('Fail to submit')
+    }
+    finally {
+      setAppState(prev => ({ ...prev, isLoading: false }));
+      setIsSubmitted(true);
+    }
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -71,8 +121,8 @@ const RSVP = () => {
                   <input
                     type="radio"
                     name="attending"
-                    value="yes"
-                    checked={formData.attending === 'yes'}
+                    value="YES"
+                    checked={formData.attending === 'YES'}
                     onChange={handleInputChange}
                     className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
                     required
@@ -83,8 +133,8 @@ const RSVP = () => {
                   <input
                     type="radio"
                     name="attending"
-                    value="no"
-                    checked={formData.attending === 'no'}
+                    value="NO"
+                    checked={formData.attending === 'NO'}
                     onChange={handleInputChange}
                     className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
                     required
@@ -172,10 +222,12 @@ const RSVP = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="inline-flex items-center space-x-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                disabled={!canSubmit || isLoading}
+                className="inline-flex items-center space-x-3 disabled:bg-yellow-800 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
               >
                 <Send className="w-6 h-6" />
                 <span>Send RSVP</span>
+                {isLoading ? <LoaderIcon className='animate-spin duration-300 transition-all' /> : null}
               </button>
             </div>
           </form>

@@ -23,8 +23,16 @@ const Footer = ({ config }: FooterProps) => {
               <span>{config.date}</span>
             </div>
             <div className="flex items-center space-x-2">
-              <MapPin className="w-5 h-5 text-yellow-400" />
-              <span>Sunset Gardens, California</span>
+              <a
+                href={config.location.googleMapsLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 group cursor-pointer"
+                title="View location on Google Maps"
+              >
+                <MapPin className="w-5 h-5 text-yellow-400" />
+                <span>{config.location.address}</span>
+              </a>
             </div>
           </div>
 
@@ -32,13 +40,19 @@ const Footer = ({ config }: FooterProps) => {
           <div className="mb-8">
             <h4 className="text-xl font-serif mb-4 text-yellow-400">Need Help? Contact Us</h4>
             <div className="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-8">
-              <div className="flex items-center space-x-2">
+              <a href={`tel:${config.contacts.phone.first[1]}`} className="hover:text-yellow-50 transition-colors duration-200 flex items-center space-x-2">
+                <span>{config.contacts.phone.first[0]}</span>
                 <Phone className="w-4 h-4 text-yellow-400" />
-                <a href="tel:+1234567890" className="hover:text-yellow-400 transition-colors duration-200">
-                  (123) 456-7890
-                </a>
-              </div>
-              <div className="flex items-center space-x-2">
+                <span>{config.contacts.phone.first[1]}</span>
+              </a>
+              <div className="hidden md:block w-px h-8 bg-yellow-400"></div>
+              <a href={`tel:${config.contacts.phone.second[1]}`} className="hover:text-yellow-50 transition-colors duration-200 flex items-center space-x-2">
+                <span>{config.contacts.phone.second[0]}</span>
+                <Phone className="w-4 h-4 text-yellow-400" />
+                <span>{config.contacts.phone.second[1]}</span>
+              </a>
+
+              <div className="hidden flexitems-center space-x-2">
                 <Mail className="w-4 h-4 text-yellow-400" />
                 <a href="mailto:oluwapelumi.oluwaseun.wedding@email.com" className="hover:text-yellow-400 transition-colors duration-200">
                   oluwapelumi.oluwaseun.wedding@email.com

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Heart, Copy, QrCode, X, DollarSign } from 'lucide-react';
 
 const Contributions = () => {
@@ -112,8 +112,40 @@ const Contributions = () => {
             </div>
           </div>
 
-          {/* Paystack Section */}
           <div className="bg-white rounded-2xl shadow-lg p-8 border border-amber-100">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                <Heart className="w-6 h-6 text-green-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-800">Bank Transfer Details</h3>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm font-medium text-gray-700">Bank Name</p>
+                <p className="text-lg font-semibold text-gray-800">Your Bank Name</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-700">Account Name</p>
+                <p className="text-lg font-semibold text-gray-800">Your Account Name</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-700">Account Number</p>
+                <p className="text-lg font-semibold text-gray-800">Your Account Number</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-700">Currency</p>
+                <p className="text-lg font-semibold text-gray-800">NGN (₦)</p>
+              </div>
+            </div>
+
+            <p className="text-sm text-gray-600 mt-6 text-center">
+              Please make your payment to the account details above
+            </p>
+          </div>
+
+          {/* Paystack Section */}
+          <div className="bg-white hidden rounded-2xl shadow-lg p-8 border border-amber-100">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
                 <Heart className="w-6 h-6 text-green-600" />

@@ -96,8 +96,16 @@ const Hero = ({ config }: HeroProps) => {
             </div>
             <div className="hidden md:block w-px h-8 bg-yellow-400"></div>
             <div className="flex items-center space-x-2">
-              <MapPin className="w-6 h-6 text-yellow-500" />
-              <span className="text-base sm:text-lg font-medium text-center">Sunset Gardens, California</span>
+              <a
+                href={config.location.googleMapsLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 group cursor-pointer"
+                title="View location on Google Maps"
+              >
+                <MapPin className="w-6 h-6 text-yellow-500" />
+                <span className="text-base sm:text-lg font-medium text-center">{config.location.address}</span>
+              </a>
             </div>
           </div>
           
