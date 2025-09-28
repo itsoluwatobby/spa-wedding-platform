@@ -1,0 +1,188 @@
+import React, { useState } from 'react';
+import { Send, Heart, User, Phone, Users, MessageSquare } from 'lucide-react';
+
+const RSVP = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    guests: '1',
+    message: '',
+    attending: ''
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically send the data to your backend
+    console.log('RSVP submitted:', formData);
+    setIsSubmitted(true);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  if (isSubmitted) {
+    return (
+      <section id="rsvp" className="py-20 bg-gradient-to-br from-yellow-50 to-white">
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          <div className="bg-white rounded-3xl p-12 shadow-2xl border-2 border-yellow-300">
+            <Heart className="w-16 h-16 text-yellow-400 mx-auto mb-6 animate-bounce" />
+            <h2 className="text-4xl font-serif text-gray-800 mb-6">Thank You!</h2>
+            <p className="text-xl text-gray-600 mb-4">
+              Your RSVP has been received successfully.
+            </p>
+            <p className="text-gray-600">
+              We can't wait to celebrate with you on our special day!
+            </p>
+            <button
+              onClick={() => setIsSubmitted(false)}
+              className="mt-8 text-yellow-500 hover:text-yellow-600 font-semibold"
+            >
+              Submit Another RSVP
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id="rsvp" className="py-20 bg-gradient-to-br from-yellow-50 to-white">
+      <div className="max-w-3xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-serif text-gray-800 mb-6">RSVP</h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Please let us know if you'll be joining us for our special day. 
+            Your response is greatly appreciated!
+          </p>
+        </div>
+
+        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border-2 border-yellow-300">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Attendance Radio Buttons */}
+            <div className="text-center">
+              <h3 className="text-2xl font-serif text-gray-800 mb-6">Will you be attending?</h3>
+              <div className="flex justify-center space-x-8">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="attending"
+                    value="yes"
+                    checked={formData.attending === 'yes'}
+                    onChange={handleInputChange}
+                    className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
+                    required
+                  />
+                  <span className="text-lg font-medium text-gray-700">Yes, I'll be there!</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="attending"
+                    value="no"
+                    checked={formData.attending === 'no'}
+                    onChange={handleInputChange}
+                    className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
+                    required
+                  />
+                  <span className="text-lg font-medium text-gray-700">Sorry, can't make it</span>
+                </label>
+              </div>
+            </div>
+
+            {/* Form Fields */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="name" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                  <User className="w-5 h-5 text-yellow-500" />
+                  <span>Full Name *</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                  <Phone className="w-5 h-5 text-yellow-500" />
+                  <span>Phone Number *</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                  placeholder="(555) 123-4567"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="guests" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                <Users className="w-5 h-5 text-yellow-500" />
+                <span>Number of Guests (including yourself) *</span>
+              </label>
+              <select
+                id="guests"
+                name="guests"
+                value={formData.guests}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+              >
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6+ Guests</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="message" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                <MessageSquare className="w-5 h-5 text-yellow-500" />
+                <span>Special Message (Optional)</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                rows={4}
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200 resize-none"
+                placeholder="Share your excitement, dietary restrictions, or any special notes..."
+              />
+            </div>
+
+            <div className="text-center">
+              <button
+                type="submit"
+                className="inline-flex items-center space-x-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <Send className="w-6 h-6" />
+                <span>Send RSVP</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default RSVP;
