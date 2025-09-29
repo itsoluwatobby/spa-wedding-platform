@@ -36,7 +36,7 @@ function App() {
         {/* FACEBOOK OG-graph */}
         <meta property="og:title" content={"Oluwapelumi&Oluwaseun'25"} />
         <meta property="og:description" content={"Our wedding is on December 27, 2025"} />
-        <meta property="og:url" content={""} />
+        <meta property="og:url" content={"https://oluwapelumi-et-oluwaseun.onrender.com"} />
         <meta property="og:image" content={"https://qcjfdelqtoswtmaetidu.supabase.co/storage/v1/object/public/persnal/together1.jpg"} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="oluwapelumi&oluwaseun" />
@@ -45,7 +45,7 @@ function App() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={"Oluwapelumi&Oluwaseun'25"} />
         <meta name="twitter:description" content={"Our wedding is on December 27, 2025"} />
-        <meta name="twitter:url" content={""} />
+        <meta name="twitter:url" content={"https://oluwapelumi-et-oluwaseun.onrender.com"} />
         <meta name="twitter:image" content={"https://qcjfdelqtoswtmaetidu.supabase.co/storage/v1/object/public/persnal/together1.jpg"} />
       </Helmet>
 
