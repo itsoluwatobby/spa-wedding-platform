@@ -57,7 +57,7 @@ function App() {
         </div>
         <Story />
         <Gallery />
-        <Invitation />
+        <Invitation googleMapsLink={config.location.googleMapsLink}/>
         <RSVP />
         <Contributions />
       </main>
