@@ -27,17 +27,17 @@ const Contributions = () => {
 
   return (
     <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white mx-auto">
-      <div className="md:max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <Heart className="w-12 h-12 text-amber-600 mx-auto mb-4" />
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Wedding Gifts</h2>
+      <div className="md:max-w-6xl mx-auto px-4 flex w-full flex-col gap-16 items-center">
+        <div className="text-center flex flex-col gap-y-4 items-center">
+          <Heart className="w-12 h-12 text-amber-600 mx-auto" />
+          <h2 className="text-4xl font-bold text-gray-800">Wedding Gifts</h2>
           <p className="text-lg max-xxs:text-base text-gray-600 max-w-2xl mx-auto">
             Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a monetary gift, 
             we've made it easy and secure for you to do so.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-6 mb-16 mx-auto">
+        <div className="grid sm:grid-cols-2 gap-6 mx-auto">
           {/* Zelle Section */}
           <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-6 border border-amber-100">
             <div className="flex items-center mb-6">
@@ -110,9 +110,15 @@ const Contributions = () => {
                 <p className="text-sm font-medium text-gray-700">Account Number</p>
                 <div className='flex items-center gap-2'>
                   <p className="text-lg font-semibold text-gray-800">{AccountDetails.first.accountNumber}</p>
-                  <CopyCheckIcon size={15} 
-                  onClick={() => copyToClipboard(AccountDetails.first.accountNumber, 'acc.no')}
-                  className={`cursor-pointer active:scale-105 ${copiedAccNo ? 'text-green-700' : 'text-gray-700'} transition-all duration-300`} />
+                  {
+                    copiedAccNo ?
+                      <CopyCheckIcon size={15}
+                      className="cursor-pointer active:scale-105 text-green-700 transition-all duration-300" />
+                    :
+                      <Copy size={15} 
+                      onClick={() => copyToClipboard(AccountDetails.first.accountNumber, 'acc.no')}
+                      className="cursor-pointer active:scale-105 text-gray-700 transition-all duration-300" />
+                  }
                 </div>
               </div>
               <div>
