@@ -17,8 +17,8 @@ const Gallery = () => {
       type: "image"
     },
     {
-      url: "/images/sunset1.png",
-      caption: "Adventure together",
+      url: "/video/lovely-moments.mp4",
+      caption: "Lovely Moments",
       type: "video"
     },
     {
@@ -82,7 +82,13 @@ const Gallery = () => {
                   }`}
                 />
                 : 
-                <video src=""></video>
+                <video 
+                src={photos[currentSlide].url}
+                autoPlay
+                controls
+                // muted
+                className='box-border h-full w-full objectcenter object-cove'
+                ></video>
               }
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             </div>
@@ -123,7 +129,7 @@ const Gallery = () => {
                 }`}
               >
                 <img
-                  src={photo.url}
+                  src={photo.type === "image" ? photo.url : "/images/sunset2.png"}
                   alt={photo.caption}
                   className="w-full h-full object-cover"
                 />

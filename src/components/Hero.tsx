@@ -96,7 +96,7 @@ const Hero = ({ config }: HeroProps) => {
               <span className="text-base sm:text-lg font-medium">{config.date}</span>
             </div>
             <div className="hidden md:block w-px h-8 bg-yellow-400"></div>
-            <div className="flex items-center space-x-2">
+            <div className="flex itemscenter space-x-2">
               <a
                 href={config.location.googleMapsLink}
                 target="_blank"
