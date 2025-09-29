@@ -103,18 +103,18 @@ const RSVP = () => {
     <section id="rsvp" className="py-20 bg-gradient-to-br from-yellow-50 to-white">
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-serif text-gray-800 mb-6">RSVP</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <h2 className="text-4xl font-serif text-gray-800 mb-6">RSVP</h2>
+          <p className="text-xl max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Please let us know if you'll be joining us for our special day. 
             Your response is greatly appreciated!
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border-2 border-yellow-300">
+        <div className="bg-white rounded-3xl shadow-2xl p-8 max-xxs:p-5 md:p-12 border-2 border-yellow-300">
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Attendance Radio Buttons */}
             <div className="text-center">
-              <h3 className="text-2xl font-serif text-gray-800 mb-6">Will you be attending?</h3>
+              <h3 className="text-2xl max-xxs:text-xl font-serif text-gray-800 mb-6">Will you be attending?</h3>
               <div className="flex justify-center space-x-8">
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -126,7 +126,7 @@ const RSVP = () => {
                     className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
                     required
                   />
-                  <span className="text-lg font-medium text-gray-700">Yes, I'll be there!</span>
+                  <span className="text-lg max-xxs:text-base font-medium text-gray-700">Yes, I'll be there!</span>
                 </label>
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -138,7 +138,7 @@ const RSVP = () => {
                     className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
                     required
                   />
-                  <span className="text-lg font-medium text-gray-700">Sorry, can't make it</span>
+                  <span className="text-lg max-xxs:text-base font-medium text-gray-700">Sorry, can't make it</span>
                 </label>
               </div>
             </div>
@@ -180,7 +180,7 @@ const RSVP = () => {
               </div>
             </div>
 
-            <div>
+            <div className='max-xxs:text-base'>
               <label htmlFor="guests" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
                 <Users className="w-5 h-5 text-yellow-500" />
                 <span>Number of Guests (including yourself) *</span>
@@ -202,7 +202,7 @@ const RSVP = () => {
               </select>
             </div>
 
-            <div>
+            <div className='max-xxs:text-base'>
               <label htmlFor="message" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
                 <MessageSquare className="w-5 h-5 text-yellow-500" />
                 <span>Special Message (Optional)</span>

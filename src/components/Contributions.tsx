@@ -45,13 +45,13 @@ const Contributions = () => {
         <div className="text-center mb-16">
           <Heart className="w-12 h-12 text-amber-600 mx-auto mb-4" />
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Wedding Gifts</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg max-xxs:text-base text-gray-600 max-w-2xl mx-auto">
             Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a monetary gift, 
             we've made it easy and secure for you to do so.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid sm:grid-cols-2 gap-6 mb-16 mx-auto">
           {/* Zelle Section */}
           <div className="bg-white rounded-2xl shadow-lg p-8 border border-amber-100">
             <div className="flex items-center mb-6">
@@ -149,7 +149,7 @@ const Contributions = () => {
         <div className="text-center bg-white rounded-2xl shadow-lg p-8 border border-amber-100">
           <Heart className="w-8 h-8 text-amber-600 mx-auto mb-4" />
           <h3 className="text-2xl font-bold text-gray-800 mb-4">Thank You</h3>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl max-xxs:max-w-3xl mx-auto">
             Your love, support, and presence mean the world to us. Any contribution you make will help us start our new journey together. 
             We are truly grateful for your generosity and can't wait to celebrate with you!
           </p>
