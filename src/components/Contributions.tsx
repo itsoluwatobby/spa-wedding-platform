@@ -123,15 +123,15 @@ const Contributions = () => {
             <div className="space-y-4">
               <div>
                 <p className="text-sm font-medium text-gray-700">Bank Name</p>
-                <p className="text-lg font-semibold text-gray-800">Your Bank Name</p>
+                <p className="text-lg font-semibold text-gray-800">Guaranty Trust Bank (GTB)</p>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-700">Account Name</p>
-                <p className="text-lg font-semibold text-gray-800">Your Account Name</p>
+                <p className="text-lg font-semibold text-gray-800">Akinola Oluwaseun</p>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-700">Account Number</p>
-                <p className="text-lg font-semibold text-gray-800">Your Account Number</p>
+                <p className="text-lg font-semibold text-gray-800">0253676497</p>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-700">Currency</p>
@@ -141,88 +141,6 @@ const Contributions = () => {
 
             <p className="text-sm text-gray-600 mt-6 text-center">
               Please make your payment to the account details above
-            </p>
-          </div>
-
-          {/* Paystack Section */}
-          <div className="bg-white hidden rounded-2xl shadow-lg p-8 border border-amber-100">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                <Heart className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800">Paystack</h3>
-            </div>
-
-            {/* Currency Selection */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-3">Select Currency</label>
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => setSelectedCurrency('USD')}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                    selectedCurrency === 'USD'
-                      ? 'bg-amber-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  USD ($)
-                </button>
-                <button
-                  onClick={() => setSelectedCurrency('NGN')}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                    selectedCurrency === 'NGN'
-                      ? 'bg-amber-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  NGN (₦)
-                </button>
-              </div>
-            </div>
-
-            {/* Suggested Amounts */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-3">Suggested Amounts</label>
-              <div className="grid grid-cols-3 gap-2">
-                {suggestedAmounts[selectedCurrency].map((amount) => (
-                  <button
-                    key={amount}
-                    onClick={() => setCustomAmount(amount.toString())}
-                    className="p-3 border border-gray-300 rounded-lg hover:border-amber-500 hover:bg-amber-50 transition-colors text-center font-medium"
-                  >
-                    {currencySymbol}{amount.toLocaleString()}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Custom Amount */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Custom Amount</label>
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">
-                  {currencySymbol}
-                </span>
-                <input
-                  type="number"
-                  value={customAmount}
-                  onChange={(e) => setCustomAmount(e.target.value)}
-                  placeholder="Enter amount"
-                  className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                />
-              </div>
-            </div>
-
-            <button
-              onClick={handlePaystackPayment}
-              disabled={!customAmount}
-              className="w-full py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors font-medium text-lg"
-            >
-              Send Gift via Paystack ({currencySymbol}{customAmount || '0'})
-            </button>
-
-            <p className="text-sm text-gray-600 mt-4 text-center">
-              Secure payment processing powered by Paystack
             </p>
           </div>
         </div>
@@ -240,7 +158,7 @@ const Contributions = () => {
 
       {/* QR Code Modal */}
       {showQRModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 p-4 w-full">
           <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
             <button
               onClick={() => setShowQRModal(false)}

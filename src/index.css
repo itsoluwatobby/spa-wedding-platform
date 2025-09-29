@@ -42,6 +42,10 @@
   }
 }
 
+body::-webkit-scrollbar {
+  width: 0px
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

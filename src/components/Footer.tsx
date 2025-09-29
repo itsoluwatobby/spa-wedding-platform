@@ -6,7 +6,7 @@ type FooterProps = {
 
 const Footer = ({ config }: FooterProps) => {
   return (
-    <footer className="bg-gray-800 text-white py-16">
+    <footer className="bg-gray-800 text-white py-16 w-full">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center">
           <div className="mb-8">

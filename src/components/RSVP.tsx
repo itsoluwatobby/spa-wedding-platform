@@ -76,7 +76,7 @@ const RSVP = () => {
 
   if (isSubmitted) {
     return (
-      <section id="rsvp" className="py-20 bg-gradient-to-br from-yellow-50 to-white">
+      <section id="rsvp" className="py-20 bg-gradient-to-br from-yellow-50 to-white w-full">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <div className="bg-white rounded-3xl p-12 shadow-2xl border-2 border-yellow-300">
             <Heart className="w-16 h-16 text-yellow-400 mx-auto mb-6 animate-bounce" />

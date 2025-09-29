@@ -110,7 +110,7 @@ const Story = () => {
   };
 
   return (
-    <section id="story" className="py-20 bg-gray-50">
+    <section id="story" className="py-20 bg-gray-50 w-full">
       <div className="max-w-7xl mx-auto px-4">
         <div ref={titleRef} className={`text-center mb-16 transition-all duration-1000 ${
           titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'

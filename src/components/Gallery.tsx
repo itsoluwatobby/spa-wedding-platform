@@ -8,19 +8,28 @@ const Gallery = () => {
   const photos = [
     {
       url: "/images/sunset2.png",
-      caption: "Adventure"
+      caption: "Adventure",
+      type: "image"
     },
     {
       url: "/images/sunset1.png",
-      caption: "Adventure together"
+      caption: "Adventure together",
+      type: "image"
+    },
+    {
+      url: "/images/sunset1.png",
+      caption: "Adventure together",
+      type: "video"
     },
     {
       url: "/images/groom2.jpg",
-      caption: "Odugwu"
+      caption: "Odugwu",
+      type: "image"
     },
     {
       url: "/images/bride6.jpg",
-      caption: "Odugwu's Madam"
+      caption: "Odugwu's Madam",
+      type: "image"
     },
     // {
     //   url: "https://images.pexels.com/photos/1024992/pexels-photo-1024992.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -50,7 +59,7 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="py-20 bg-white">
+    <section id="gallery" className="py-20 bg-white w-full">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-serif text-gray-800 mb-6">Our Journey Together</h2>
@@ -63,13 +72,18 @@ const Gallery = () => {
           {/* Main Slideshow */}
           <div className="relative overflow-hidden rounded-3xl shadow-2xl group">
             <div className="aspect-w-16 aspect-h-9 h-96 md:h-[500px]">
-              <img
-                src={photos[currentSlide].url}
-                alt={photos[currentSlide].caption}
-                className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
-                  isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
-                }`}
-              />
+              {
+                photos[currentSlide].type === "image" ?
+                <img
+                  src={photos[currentSlide].url}
+                  alt={photos[currentSlide].caption}
+                  className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
+                    isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
+                  }`}
+                />
+                : 
+                <video src=""></video>
+              }
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             </div>
             

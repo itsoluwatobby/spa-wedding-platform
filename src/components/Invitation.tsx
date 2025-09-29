@@ -7,7 +7,7 @@ type InvitationProps = {
 const Invitation: React.FC<InvitationProps> = ({ googleMapsLink }) => {
 
   return (
-    <section id="invitation" className="py-20 bg-gradient-to-br from-white to-amber-50">
+    <section id="invitation" className="py-20 bg-gradient-to-br from-white to-amber-50 w-full">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <Heart className="w-12 h-12 text-amber-600 mx-auto mb-4 animate-pulse" />

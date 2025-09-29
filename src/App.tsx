@@ -31,7 +31,7 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white w-full">
       <Helmet>
         {/* FACEBOOK OG-graph */}
         <meta property="og:title" content={"Oluwapelumi&Oluwaseun'25"} />
@@ -51,7 +51,7 @@ function App() {
 
       <Navigation name={config.name} />
 
-      <main>
+      <main className="w-full">
         <div id="home">
           <Hero config={config} />
         </div>
