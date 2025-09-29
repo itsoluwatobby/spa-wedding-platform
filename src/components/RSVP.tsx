@@ -17,7 +17,6 @@ const RSVP = () => {
   const [appState, setAppState] = useState<typeof initAppState>(initAppState);
   const [formData, setFormData] = useState(initFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  // const [printIv, setPrintIv] = useState<Toggle>('CLOSE')
 
   const { isLoading } = appState;
 
@@ -35,36 +34,36 @@ const RSVP = () => {
         dateStyle: 'medium'
       }).format(new Date())
       let newEntry = {
-        Date: date,
-        Name: formData.name,
-        "Phone number": formData.phone,
-        "Will you be attending": formData.attending,
-        "Number of guests": formData.guests,
-        // "What will you be Attending": isAttendingType === initInputValue.isAttendingType ? 'All Events' : isAttendingType,
-        Message: formData.message
+        date: date,
+        name: formData.name,
+        phone: formData.phone,
+        attending: formData.attending,
+        guests: formData.guests,
+        message: formData.message
       };
+
       newEntry = sanitizeEntries(newEntry);
-      const res = await fetch('https://api.sheetbest.com/sheets/d298816a-069e-493e-9146-529dad3759db', {
+      await fetch('https://script.google.com/macros/s/AKfycbwDA7K7u_3qNSn9JO_dGc002Al2DdM5OEERuZOXRCBZw9ewbXUVnNGcsy8FuM-nUdYIPw/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newEntry)
+        body: JSON.stringify(newEntry),
+        mode: 'no-cors'
       })
-      if (res.ok) {
-        // setPrintIv('OPEN')
-        toast.success('Response recorded, Please print your Invitation Card')
-        setFormData(initFormData)
-      }
+
+      toast.success('Response recorded, Please print your Invitation Card');
+      setFormData(initFormData);
+      setIsSubmitted(true);
     }
-    catch (error) {
+    catch (error: any) {
       // setPrintIv('OPEN')
+      console.log(error.message)
       setAppState(prev => ({ ...prev, error: '' }));
       toast.error('Fail to submit')
     }
     finally {
       setAppState(prev => ({ ...prev, isLoading: false }));
-      setIsSubmitted(true);
     }
   }
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Heart, Star, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Heart, Star, Calendar, ChevronLeft, ChevronRight, SignalHighIcon } from 'lucide-react';
 
 const useIntersectionObserver = (options = {}) => {
   const [isVisible, setIsVisible] = React.useState(false);
@@ -35,22 +35,39 @@ const Story = () => {
   const milestones = [
     {
       icon: Star,
-      date: "March 2018",
+      date: "2023",
       title: "First Meeting",
-      description: "We met at a cozy coffee shop downtown during a rainy afternoon. Little did we know it would be the beginning of our forever."
+      description: "Our story began in 2023, during my service year, when I was posted to my place of primary assignment. At the time, Oluwaseun was the head of a department, and I was a fresh Corps member in the same organization.",
+      author: null
+    },
+    {
+      icon: SignalHighIcon,
+      date: "2023",
+      title: "The Beginning",
+      description: "What started as a professional, senior-to-junior relationship soon blossomed into something deeper. His passion for people’s growth and development made him stand out in a special way.",
+      author: "Oluwapelumi"
+    },
+    {
+      icon: SignalHighIcon,
+      date: "2023",
+      title: "Beginning...",
+      description: "From guiding me with wisdom to being a steady source of support, Oluwaseun was always there-showing kindness, encouragement, and genuine care. Our friendship grew naturally, and before we realized it, love had found its way into our hearts",
+      author: "Oluwapelumi"
     },
     {
       icon: Heart,
-      date: "December 2019",
-      title: "First 'I Love You'",
-      description: "Under the Christmas lights at the city park, we shared our first 'I love you' and knew this was something special."
+      date: "Late 2023",
+      title: "Love Journey",
+      description: "By late 2023, our love journey officially began. Despite the miles between us and the challenges life placed in our path, our bond only grew stronger. What started as a simple work connection has flourished into a beautiful love story-one built on patience, friendship, and unwavering commitment.",
+      author: "Oluwapelumi"
     },
-    {
-      icon: Calendar,
-      date: "August 2023",
-      title: "The Proposal",
-      description: "During our favorite hiking trail at sunset, Oluwaseun got down on one knee and asked Oluwapelumi to be his forever adventure partner."
-    }
+    // {
+    //   icon: Calendar,
+    //   date: "March 2025",
+    //   title: "The Proposal",
+    //   description: "During our favorite hiking trail at sunset, Oluwaseun got down on one knee and asked Oluwapelumi to be his forever adventure partner.",
+    //   author: null
+    // }
   ];
 
   // Duplicate milestones for infinite scroll effect

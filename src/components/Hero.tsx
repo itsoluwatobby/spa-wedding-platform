@@ -60,7 +60,8 @@ const Hero = ({ config }: HeroProps) => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          src="/images/sunset2.png"
+          // src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1600"
           alt="Wedding Background"
           className="w-full h-full object-cover"
         />

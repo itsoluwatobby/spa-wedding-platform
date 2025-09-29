@@ -7,25 +7,25 @@ const Gallery = () => {
 
   const photos = [
     {
-      url: "https://images.pexels.com/photos/1024994/pexels-photo-1024994.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      caption: "Our engagement photoshoot"
+      url: "/images/sunset2.png",
+      caption: "Adventure"
     },
     {
-      url: "https://images.pexels.com/photos/1616403/pexels-photo-1616403.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      caption: "Dancing under the stars"
-    },
-    {
-      url: "https://images.pexels.com/photos/1024997/pexels-photo-1024997.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      url: "/images/sunset1.png",
       caption: "Adventure together"
     },
     {
-      url: "https://images.pexels.com/photos/1616404/pexels-photo-1616404.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      caption: "Quiet moments"
+      url: "/images/groom2.jpg",
+      caption: "Odugwu"
     },
     {
-      url: "https://images.pexels.com/photos/1024992/pexels-photo-1024992.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      caption: "Celebrating love"
-    }
+      url: "/images/bride6.jpg",
+      caption: "Odugwu's Madam"
+    },
+    // {
+    //   url: "https://images.pexels.com/photos/1024992/pexels-photo-1024992.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    //   caption: "Celebrating love"
+    // }
   ];
 
   const nextSlide = () => {
