@@ -43,7 +43,8 @@
 }
 
 body::-webkit-scrollbar {
-  width: 0px
+  width: 0px;
+  background-color: green;
 }
 
 @keyframes fadeInUp {

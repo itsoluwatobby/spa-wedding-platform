@@ -56,7 +56,7 @@ const Hero = ({ config }: HeroProps) => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden w-full bg-purple-600">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
