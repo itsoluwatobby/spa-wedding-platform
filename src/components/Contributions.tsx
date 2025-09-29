@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Heart, Copy, QrCode, X, DollarSign } from 'lucide-react';
 
 const Contributions = () => {
-  const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'NGN'>('USD');
-  const [customAmount, setCustomAmount] = useState('');
+  // const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'NGN'>('USD');
+  // const [customAmount, setCustomAmount] = useState('');
   const [showQRModal, setShowQRModal] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedInfo, setCopiedInfo] = useState(false);
@@ -11,12 +11,12 @@ const Contributions = () => {
   const zelleEmail = 'akinolaoluwaseun51@gmail.com';
   const recipientName = 'Akinola Oluwaseun Moses';
 
-  const suggestedAmounts = {
-    USD: [25, 50, 100, 200, 500],
-    NGN: [10000, 25000, 50000, 100000, 200000]
-  };
+  // const suggestedAmounts = {
+  //   USD: [25, 50, 100, 200, 500],
+  //   NGN: [10000, 25000, 50000, 100000, 200000]
+  // };
 
-  const currencySymbol = selectedCurrency === 'USD' ? '$' : '₦';
+  // const currencySymbol = selectedCurrency === 'USD' ? '$' : '₦';
 
   const copyToClipboard = (text: string, type: 'email' | 'info') => {
     navigator.clipboard.writeText(text);
@@ -34,10 +34,10 @@ const Contributions = () => {
     copyToClipboard(info, 'info');
   };
 
-  const handlePaystackPayment = () => {
-    // Placeholder for Paystack integration
-    alert(`Processing ${currencySymbol}${customAmount || '50'} payment via Paystack`);
-  };
+  // const handlePaystackPayment = () => {
+  //   // Placeholder for Paystack integration
+  //   alert(`Processing ${currencySymbol}${customAmount || '50'} payment via Paystack`);
+  // };
 
   return (
     <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white">

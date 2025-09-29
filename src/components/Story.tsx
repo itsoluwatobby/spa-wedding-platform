@@ -38,7 +38,14 @@ const Story = () => {
       date: "2023",
       title: "First Meeting",
       description: "Our story began in 2023, during my service year, when I was posted to my place of primary assignment. At the time, Oluwaseun was the head of a department, and I was a fresh Corps member in the same organization.",
-      author: null
+      author: 'Oluwapelumi'
+    },
+    {
+      icon: Star,
+      date: "2023",
+      title: "First Meeting",
+      description: "My first encounter with Oluwapelumi wasn’t the “love at first sight” people often talk about. It was just another busy day at the office-I was focused on getting my team to complete some projects, and she had come with her friend to settle her clearance as a youth corps member. To me, she was simply a junior colleague still learning the ropes, and I would often send her on errands to help her pick things up faster. A relationship wasn’t even on my mind.",
+      author: 'Oluwaseun'
     },
     {
       icon: SignalHighIcon,
@@ -127,13 +134,13 @@ const Story = () => {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrevious}
-            className="absolute left-6 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute left-6 top-[40%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-6 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute right-6 top-[40%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -153,7 +160,7 @@ const Story = () => {
               return (
                 <div
                   key={`${originalIndex}-${Math.floor(index / milestones.length)}`}
-                  className={`flex-shrink-0 w-[92%] md:w-[640px] bg-white rounded-2xl p-8 md:p-12 shadow-lg hover:shadow-xl transition-all duration-700 text-center group hover:-translate-y-2 transform snap-center ${
+                  className={`relative flex-shrink-0 w-[92%] md:w-[640px] bg-white rounded-2xl p-8 md:p-12 shadow-lg hover:shadow-xl transition-all duration-700 text-center group hover:-translate-y-2 transform snap-center ${
                     isActive ? 'ring-2 ring-yellow-400 scale-105' : ''
                   }`}
                 >
@@ -166,9 +173,10 @@ const Story = () => {
                   <h3 className="text-3xl md:text-4xl font-serif text-gray-800 mb-6">
                     {milestone.title}
                   </h3>
-                  <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg mx-auto">
+                  <p className="max-sm:text-base text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg mx-auto">
                     {milestone.description}
                   </p>
+                  <span className='absolute right-4 bottom-4 mt-4'>~{milestone.author}</span>
                 </div>
               );
             })}
