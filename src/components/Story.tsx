@@ -174,7 +174,7 @@ const Story = () => {
                   <h3 className="text-3xl md:text-4xl font-serif text-gray-800 mb-6">
                     {milestone.title}
                   </h3>
-                  <p className="max-xxs:text-base text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg max-xxs:max-w-xl mx-auto">
+                  <p className="max-xxs:text-sm text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg max-xxs:max-w-xl mx-auto">
                     {milestone.description}
                   </p>
                   <span className='absolute right-4 bottom-4 mt-4'>~{milestone.author}</span>

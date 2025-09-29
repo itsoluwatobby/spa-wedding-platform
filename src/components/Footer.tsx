@@ -11,8 +11,8 @@ const Footer = ({ config }: FooterProps) => {
         <div className="text-center">
           <div className="mb-8">
             <Heart className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
-            <h3 className="text-3xl font-serif mb-4">{config.name}</h3>
-            <p className="text-gray-300 text-lg mb-6">
+            <h3 className="text-3xl max-xxs:text-2xl font-serif mb-4">{config.name}</h3>
+            <p className="text-gray-300 text-lg max-xxs:text-base mb-6">
               Thank you for being part of our love story
             </p>
           </div>
@@ -31,15 +31,15 @@ const Footer = ({ config }: FooterProps) => {
                 title="View location on Google Maps"
               >
                 <MapPin className="w-5 h-5 text-yellow-400" />
-                <span>{config.location.address}</span>
+                <span className='max-xxs:text-base'>{config.location.address}</span>
               </a>
             </div>
           </div>
 
           {/* Contact Information */}
           <div className="mb-8">
-            <h4 className="text-xl font-serif mb-4 text-yellow-400">Need Help? Contact Us</h4>
-            <div className="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-8">
+            <h4 className="text-xl max-xxs:text-lg font-serif mb-4 text-yellow-400">Need Help? Contact Us</h4>
+            <div className="flex flex-col max-xxs:text-base md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-8">
               <a href={`tel:${config.contacts.phone.first[1]}`} className="hover:text-yellow-50 transition-colors duration-200 flex items-center space-x-2">
                 <span>{config.contacts.phone.first[0]}</span>
                 <Phone className="w-4 h-4 text-yellow-400" />
@@ -62,7 +62,7 @@ const Footer = ({ config }: FooterProps) => {
           </div>
 
           <div className="border-t border-gray-700 pt-8">
-            <p className="text-gray-400">
+            <p className="text-gray-400 max-xxs:text-base">
               © 2025 {config.name}'s Wedding. Made with love for our special day.
             </p>
           </div>

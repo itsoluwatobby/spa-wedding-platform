@@ -40,8 +40,8 @@ const Contributions = () => {
   // };
 
   return (
-    <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white">
-      <div className="max-w-6xl mx-auto px-4">
+    <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white mx-auto">
+      <div className="md:max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <Heart className="w-12 h-12 text-amber-600 mx-auto mb-4" />
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Wedding Gifts</h2>

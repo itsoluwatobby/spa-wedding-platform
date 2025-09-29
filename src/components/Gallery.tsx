@@ -62,8 +62,8 @@ const Gallery = () => {
     <section id="gallery" className="py-20 bg-white w-full">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-serif text-gray-800 mb-6">Our Journey Together</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <h2 className="text-5xl max-xxs:text-4xl font-serif text-gray-800 mb-6">Our Journey Together</h2>
+          <p className="text-xl max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
             A collection of beautiful moments we've shared together, capturing the essence of our love story.
           </p>
         </div>

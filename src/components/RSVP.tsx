@@ -126,7 +126,7 @@ const RSVP = () => {
                     className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
                     required
                   />
-                  <span className="text-lg max-xxs:text-base font-medium text-gray-700">Yes, I'll be there!</span>
+                  <span className="text-lg max-xxs:text-sm font-medium text-gray-700">Yes, I'll be there!</span>
                 </label>
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -138,7 +138,7 @@ const RSVP = () => {
                     className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
                     required
                   />
-                  <span className="text-lg max-xxs:text-base font-medium text-gray-700">Sorry, can't make it</span>
+                  <span className="text-lg max-xxs:text-sm font-medium text-gray-700">Sorry, can't make it</span>
                 </label>
               </div>
             </div>

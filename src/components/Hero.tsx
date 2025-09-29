@@ -105,7 +105,7 @@ const Hero = ({ config }: HeroProps) => {
                 title="View location on Google Maps"
               >
                 <MapPin className="w-6 h-6 text-yellow-500" />
-                <span className="text-base sm:text-lg font-medium text-center">{config.location.address}</span>
+                <span className="text-sm sm:text-lg font-medium text-center">{config.location.address}</span>
               </a>
             </div>
           </div>
