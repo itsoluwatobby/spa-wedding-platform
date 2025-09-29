@@ -31,7 +31,7 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bgwhite bg-red-500 w-full">
+    <div className="min-h-screen bg-white w-full overflow-x-hidden">
       <Helmet>
         {/* FACEBOOK OG-graph */}
         <meta property="og:title" content={"Oluwapelumi&Oluwaseun'25"} />
