@@ -39,7 +39,7 @@ const Contributions = () => {
 
         <div className="flexitems-centermax-sm:flex-col grid sm:grid-cols-2 gap-6 mx-auto">
           {/* Zelle Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-6 border border-amber-100 w-full">
+          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-5 border border-amber-100 w-full">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                 <DollarSign className="w-6 h-6 text-blue-600" />
@@ -47,7 +47,7 @@ const Contributions = () => {
               <h3 className="text-2xl font-bold text-gray-800">Zelle</h3>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-4 w-full">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                 <div className="flex items-center space-x-2">
@@ -89,7 +89,7 @@ const Contributions = () => {
           </div>
 
           {/* Bank Details Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-6 border border-amber-100 w-full">
+          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-5 border border-amber-100 w-full">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
                 <Heart className="w-6 h-6 text-green-600" />
@@ -97,19 +97,19 @@ const Contributions = () => {
               <h3 className="text-2xl font-bold text-gray-800">Bank Transfer Details</h3>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 w-full">
               <div>
                 <p className="text-sm font-medium text-gray-700">Bank Name</p>
-                <p className="text-lg font-semibold text-gray-800">{AccountDetails.first.bankName}</p>
+                <p className="text-base font-semibold text-gray-800">{AccountDetails.first.bankName}</p>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-700">Account Name</p>
-                <p className="text-lg font-semibold text-gray-800">{AccountDetails.first.accountName}</p>
+                <p className="text-base font-semibold text-gray-800">{AccountDetails.first.accountName}</p>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-700">Account Number</p>
                 <div className='flex items-center gap-2'>
-                  <p className="text-lg font-semibold text-gray-800">{AccountDetails.first.accountNumber}</p>
+                  <p className="text-base font-semibold text-gray-800">{AccountDetails.first.accountNumber}</p>
                   {
                     copiedAccNo ?
                       <CopyCheckIcon size={15}
@@ -123,7 +123,7 @@ const Contributions = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-700">Currency</p>
-                <p className="text-lg font-semibold text-gray-800">NGN (₦)</p>
+                <p className="text-base font-semibold text-gray-800">NGN (₦)</p>
               </div>
             </div>
 

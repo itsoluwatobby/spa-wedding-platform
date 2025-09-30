@@ -231,7 +231,7 @@ const Story = () => {
               return (
                 <div
                   key={`${originalIndex}-${Math.floor(index / milestones.length)}`}
-                  className={`relative flex-shrink-0 w-[92%] md:w-[640px] bg-white rounded-2xl p-8 md:p-12 shadow-lg hover:shadow-xl transition-all duration-700 text-center group hover:-translate-y-2 transform snap-center ${
+                  className={`relative flex-shrink-0 w-[92%] md:w-[640px] bg-white rounded-2xl p-7 max-xxs:px-4 md:p-12 shadow-lg hover:shadow-xl transition-all duration-700 text-center group hover:-translate-y-2 transform snap-center ${
                     isActive ? 'ring-2 ring-yellow-400 scale-105' : ''
                   }`}
                 >
@@ -244,10 +244,10 @@ const Story = () => {
                   <h3 className="text-3xl md:text-4xl font-serif text-gray-800 mb-6">
                     {milestone.title}
                   </h3>
-                  <p className="max-xxs:text-sm text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg max-xxs:max-w-xl mx-auto">
+                  <p className="max-xxs:text-sm text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg max-xxs:max-w-2xl mx-auto">
                     {milestone.description}
                   </p>
-                  <span className='absolute right-4 bottom-4 mt-4'>~{milestone.author}</span>
+                  <span className='absolute right-4 bottom-2 mt-4'>~{milestone.author}</span>
                 </div>
               );
             })}
