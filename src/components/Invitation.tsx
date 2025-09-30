@@ -15,7 +15,7 @@ const Invitation: React.FC<InvitationProps> = ({ googleMapsLink }) => {
             Our Invitation
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Download and share our beautiful wedding invitation
+            Download our beautiful wedding invitation
           </p>
         </div>
 

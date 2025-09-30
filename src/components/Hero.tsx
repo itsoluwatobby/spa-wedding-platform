@@ -61,7 +61,6 @@ const Hero = ({ config }: HeroProps) => {
       <div className="absolute inset-0 z-0">
         <img
           src="/images/sunset2.png"
-          // src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1600"
           alt="Wedding Background"
           className="w-full h-full object-cover"
         />
@@ -96,18 +95,16 @@ const Hero = ({ config }: HeroProps) => {
               <span className="text-base sm:text-lg font-medium">{config.date}</span>
             </div>
             <div className="hidden md:block w-px h-8 bg-yellow-400"></div>
-            <div className="flex itemscenter space-x-2">
-              <a
-                href={config.location.googleMapsLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 group cursor-pointer"
-                title="View location on Google Maps"
-              >
-                <MapPin className="w-6 h-6 text-yellow-500" />
-                <span className="text-sm sm:text-lg font-medium text-center">{config.location.address}</span>
-              </a>
-            </div>
+            <a
+              href={config.location.googleMapsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-sm sm:text-lg font-medium sm:space-x-2 space-x-1 cursor-pointer"
+              title="View location on Google Maps"
+            >
+              <MapPin className="w-6 h-6 text-yellow-500 mr-2" />
+              {config.location.address}
+            </a>
           </div>
           
           <div className="mt-6 sm:mt-8">

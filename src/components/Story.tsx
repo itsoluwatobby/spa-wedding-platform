@@ -45,7 +45,14 @@ const Story = () => {
       icon: Star,
       date: "2023",
       title: "First Meeting",
-      description: "My first encounter with Oluwapelumi wasn’t the “love at first sight” people often talk about. It was just another busy day at the office-I was focused on getting my team to complete some projects, and she had come with her friend to settle her clearance as a youth corps member. To me, she was simply a junior colleague still learning the ropes, and I would often send her on errands to help her pick things up faster. A relationship wasn’t even on my mind.",
+      description: "My first encounter with Oluwapelumi wasn’t the “love at first sight” people often talk about. It was just another busy day at the office-I was focused on getting my team to complete some projects, and she had come with her friend to settle her clearance as a youth corps member.",
+      author: 'Oluwaseun'
+    },
+    {
+      icon: Star,
+      date: "2023",
+      title: "First Meeting",
+      description: "To me, she was simply a junior colleague still learning the ropes, and I would often send her on errands to help her pick things up faster. A relationship wasn’t even on my mind.",
       author: 'Oluwaseun'
     },
     {
@@ -135,13 +142,13 @@ const Story = () => {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrevious}
-            className="absolute left-6 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute left-4 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-6 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute right-4 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -208,7 +215,7 @@ const Story = () => {
         }`}>
           <div className="bg-white rounded-3xl p-12 shadow-2xl max-w-4xl mx-auto border-2 border-yellow-300">
             <Heart className="w-12 h-12 text-yellow-400 mx-auto mb-6 animate-pulse" />
-            <blockquote className="text-2xl font-serif text-gray-700 italic leading-relaxed mb-6">
+            <blockquote className="text-2xl max-xxs:text-xl font-serif text-gray-700 italic leading-relaxed mb-6">
               "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
             </blockquote>
             <cite className="text-gray-500">- Maya Angelou</cite>

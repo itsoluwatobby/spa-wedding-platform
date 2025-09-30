@@ -26,7 +26,7 @@ const Contributions = () => {
   };
 
   return (
-    <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white mx-auto">
+    <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white mx-auto w-full flex flex-col items-center">
       <div className="md:max-w-6xl mx-auto px-4 flex w-full flex-col gap-16 items-center">
         <div className="text-center flex flex-col gap-y-4 items-center">
           <Heart className="w-12 h-12 text-amber-600 mx-auto" />
@@ -37,9 +37,9 @@ const Contributions = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-6 mx-auto">
+        <div className="flex items-center max-sm:flex-col gap-6 mx-auto">
           {/* Zelle Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-6 border border-amber-100">
+          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-6 border border-amber-100 w-full">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                 <DollarSign className="w-6 h-6 text-blue-600" />
@@ -89,7 +89,7 @@ const Contributions = () => {
           </div>
 
           {/* Bank Details Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-6 border border-amber-100">
+          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-6 border border-amber-100 w-full">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
                 <Heart className="w-6 h-6 text-green-600" />
