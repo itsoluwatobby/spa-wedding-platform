@@ -54,7 +54,7 @@ const Contributions = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6 max-xxs:px-4">
           {/* Zelle Section */}
           <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-5 border border-amber-100 w-full">
             <div className="flex items-center mb-6">
