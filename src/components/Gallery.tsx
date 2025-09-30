@@ -17,8 +17,8 @@ const Gallery = () => {
       type: "image"
     },
     {
-      url: "/images/sunset1.png",
-      caption: "Adventure together",
+      url: "/video/lovely-moments.mp4",
+      caption: "Lovely Moments",
       type: "video"
     },
     {
@@ -62,8 +62,8 @@ const Gallery = () => {
     <section id="gallery" className="py-20 bg-white w-full">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-serif text-gray-800 mb-6">Our Journey Together</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <h2 className="text-5xl max-xxs:text-4xl font-serif text-gray-800 mb-6">Our Journey Together</h2>
+          <p className="text-xl max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
             A collection of beautiful moments we've shared together, capturing the essence of our love story.
           </p>
         </div>
@@ -82,7 +82,13 @@ const Gallery = () => {
                   }`}
                 />
                 : 
-                <video src=""></video>
+                <video 
+                src={photos[currentSlide].url}
+                autoPlay
+                controls
+                // muted
+                className='box-border h-full w-full objectcenter object-cove'
+                ></video>
               }
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             </div>
@@ -123,7 +129,7 @@ const Gallery = () => {
                 }`}
               >
                 <img
-                  src={photo.url}
+                  src={photo.type === "image" ? photo.url : "/images/sunset2.png"}
                   alt={photo.caption}
                   className="w-full h-full object-cover"
                 />

@@ -25,6 +25,7 @@ const useIntersectionObserver = (options = {}) => {
 };
 
 const Story = () => {
+  const MaxWrodLength = 500
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isAutoScrolling, setIsAutoScrolling] = React.useState(true);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -123,7 +124,7 @@ const Story = () => {
           titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <h2 className="text-5xl font-serif text-gray-800 mb-6">Our Love Story</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Every love story is beautiful, but ours is our favorite. Here's how our journey began
             and the moments that brought us to this special day.
           </p>
@@ -134,13 +135,13 @@ const Story = () => {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrevious}
-            className="absolute left-6 top-[40%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute left-6 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-6 top-[40%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute right-6 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -173,7 +174,7 @@ const Story = () => {
                   <h3 className="text-3xl md:text-4xl font-serif text-gray-800 mb-6">
                     {milestone.title}
                   </h3>
-                  <p className="max-sm:text-base text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg mx-auto">
+                  <p className="max-xxs:text-sm text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg max-xxs:max-w-xl mx-auto">
                     {milestone.description}
                   </p>
                   <span className='absolute right-4 bottom-4 mt-4'>~{milestone.author}</span>

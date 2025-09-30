@@ -96,7 +96,7 @@ const Hero = ({ config }: HeroProps) => {
               <span className="text-base sm:text-lg font-medium">{config.date}</span>
             </div>
             <div className="hidden md:block w-px h-8 bg-yellow-400"></div>
-            <div className="flex items-center space-x-2">
+            <div className="flex itemscenter space-x-2">
               <a
                 href={config.location.googleMapsLink}
                 target="_blank"
@@ -105,7 +105,7 @@ const Hero = ({ config }: HeroProps) => {
                 title="View location on Google Maps"
               >
                 <MapPin className="w-6 h-6 text-yellow-500" />
-                <span className="text-base sm:text-lg font-medium text-center">{config.location.address}</span>
+                <span className="text-sm sm:text-lg font-medium text-center">{config.location.address}</span>
               </a>
             </div>
           </div>
