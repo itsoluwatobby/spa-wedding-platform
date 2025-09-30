@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Heart, Star, Calendar, ChevronLeft, ChevronRight, SignalHighIcon } from 'lucide-react';
+import { Heart, Star, Calendar, ChevronLeft, ChevronRight, SignalHighIcon, Badge } from 'lucide-react';
 
 const useIntersectionObserver = (options = {}) => {
   const [isVisible, setIsVisible] = React.useState(false);
@@ -45,7 +45,14 @@ const Story = () => {
       icon: Star,
       date: "2023",
       title: "First Meeting",
-      description: "My first encounter with Oluwapelumi wasn’t the “love at first sight” people often talk about. It was just another busy day at the office-I was focused on getting my team to complete some projects, and she had come with her friend to settle her clearance as a youth corps member. To me, she was simply a junior colleague still learning the ropes, and I would often send her on errands to help her pick things up faster. A relationship wasn’t even on my mind.",
+      description: "My first encounter with Oluwapelumi wasn’t the “love at first sight” people often talk about. It was just another busy day at the office-I was focused on getting my team to complete some projects, and she had come with her friend to settle her clearance as a youth corps member.",
+      author: 'Oluwaseun'
+    },
+    {
+      icon: Star,
+      date: "2023",
+      title: "First Meeting",
+      description: "To me, she was simply a junior colleague still learning the ropes, and I would often send her on errands to help her pick things up faster. A relationship wasn’t even on my mind.",
       author: 'Oluwaseun'
     },
     {
@@ -63,11 +70,74 @@ const Story = () => {
       author: "Oluwapelumi"
     },
     {
+      icon: SignalHighIcon,
+      date: "2023",
+      title: "The Beginning",
+      description: "But tides began to change after my birthday. She wasn’t around to celebrate with me, but she called to wish me well and playfully asked for her share of the goodies from the celebration. That simple call created a connection. Later, during a staff retreat at Elegushi beach, we grew closer, though still as friends-almost like siblings.",
+      author: "Oluwaseun"
+    },
+    {
+      icon: SignalHighIcon,
+      date: "2023",
+      title: "Beginning...",
+      description: "Interestingly, she bears the same name as my sister, Oluwapelumi, and that made me naturally protective of her, guiding her as she learned, encouraging her to take daring steps, and praying with her every morning.",
+      author: "Oluwaseun"
+    },
+    {
+      icon: SignalHighIcon,
+      date: "2023",
+      title: "Beginning...",
+      description: "I would call her by 6 a.m. so we could join the online devotion together before starting the day. It was a bond rooted in faith and growth, but in my mind, it was still brotherly.",
+      author: "Oluwaseun"
+    },
+    {
       icon: Heart,
       date: "Late 2023",
       title: "Love Journey",
       description: "By late 2023, our love journey officially began. Despite the miles between us and the challenges life placed in our path, our bond only grew stronger. What started as a simple work connection has flourished into a beautiful love story-one built on patience, friendship, and unwavering commitment.",
       author: "Oluwapelumi"
+    },
+    {
+      icon: Heart,
+      date: "Late 2023",
+      title: "Love Journey...",
+      description: "And today, here we are, ready to begin forever together.",
+      author: "Oluwapelumi"
+    },
+    {
+      icon: Heart,
+      date: "Late 2023",
+      title: "Love Journey",
+      description: "Then in 2023, everything shifted. One day at the office, it felt like my eyes were opened for the first time. I no longer saw just a colleague, or a sister-figure. I saw a wife, a companion, a helper. Every fiber of my being knew it: she was the one.",
+      author: "Oluwaseun"
+    },
+    {
+      icon: Heart,
+      date: "Late 2023",
+      title: "Love Journey...",
+      description: "Asking her to move from “friend-zone” to being my girlfriend was one of the hardest steps, but she blushed, smiled, and said yes. That moment confirmed for me that meeting her was divine.",
+      author: "Oluwaseun"
+    },
+    {
+      icon: Badge,
+      date: "Late 2023",
+      title: "Appreciation",
+      description: "I often thank God-and remember fondly Daniel Akinfolarin, who convinced her to work at BHCL-for orchestrating our paths to cross. Without that, we might never have met.",
+      author: "Oluwaseun"
+    },
+    {
+      icon: Badge,
+      date: "Late 2023",
+      title: "Appreciation...",
+      description: "Despite the oppositions and miles apart, our love has only grown stronger. This is nothing short of God’s presence in our relationship and the choices we’ve made to love, support, and build each other up.",
+      author: "Oluwaseun"
+    },
+    {
+      icon: Badge,
+      date: "Love",
+      title: "Appreciation...",
+      description: "Even in disagreements, we’ve learned patience, communication, and deeper communion in Christ. And today, I am confident of this: that the God who began this good work in us will surely carry it on to completion until the day of Christ Jesus.",
+      author: "Oluwapelumi&Oluwaseun"
     },
     // {
     //   icon: Calendar,
@@ -135,13 +205,13 @@ const Story = () => {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrevious}
-            className="absolute left-6 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute left-5 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-6 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
+            className="absolute right-5 top-[35%] -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -161,7 +231,7 @@ const Story = () => {
               return (
                 <div
                   key={`${originalIndex}-${Math.floor(index / milestones.length)}`}
-                  className={`relative flex-shrink-0 w-[92%] md:w-[640px] bg-white rounded-2xl p-8 md:p-12 shadow-lg hover:shadow-xl transition-all duration-700 text-center group hover:-translate-y-2 transform snap-center ${
+                  className={`relative flex-shrink-0 w-[92%] md:w-[640px] bg-white rounded-2xl p-7 max-xxs:px-4 md:p-12 shadow-lg hover:shadow-xl transition-all duration-700 text-center group hover:-translate-y-2 transform snap-center ${
                     isActive ? 'ring-2 ring-yellow-400 scale-105' : ''
                   }`}
                 >
@@ -174,10 +244,10 @@ const Story = () => {
                   <h3 className="text-3xl md:text-4xl font-serif text-gray-800 mb-6">
                     {milestone.title}
                   </h3>
-                  <p className="max-xxs:text-sm text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg max-xxs:max-w-xl mx-auto">
+                  <p className="max-xxs:text-sm text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg max-xxs:max-w-2xl mx-auto">
                     {milestone.description}
                   </p>
-                  <span className='absolute right-4 bottom-4 mt-4'>~{milestone.author}</span>
+                  <span className='absolute right-4 bottom-2 mt-4'>~{milestone.author}</span>
                 </div>
               );
             })}
@@ -208,7 +278,7 @@ const Story = () => {
         }`}>
           <div className="bg-white rounded-3xl p-12 shadow-2xl max-w-4xl mx-auto border-2 border-yellow-300">
             <Heart className="w-12 h-12 text-yellow-400 mx-auto mb-6 animate-pulse" />
-            <blockquote className="text-2xl font-serif text-gray-700 italic leading-relaxed mb-6">
+            <blockquote className="text-2xl max-xxs:text-xl font-serif text-gray-700 italic leading-relaxed mb-6">
               "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
             </blockquote>
             <cite className="text-gray-500">- Maya Angelou</cite>

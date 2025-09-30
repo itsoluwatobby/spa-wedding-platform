@@ -12,7 +12,7 @@ const Gallery = () => {
       type: "image"
     },
     {
-      url: "/images/sunset1.png",
+      url: "/images/together3.jpg",
       caption: "Adventure together",
       type: "image"
     },
@@ -22,13 +22,18 @@ const Gallery = () => {
       type: "video"
     },
     {
-      url: "/images/groom2.jpg",
+      url: "/images/groom3.jpg",
       caption: "Odugwu",
       type: "image"
     },
     {
       url: "/images/bride6.jpg",
       caption: "Odugwu's Madam",
+      type: "image"
+    },
+    {
+      url: "/images/together4.jpg",
+      caption: "Beautiful",
       type: "image"
     },
     // {
@@ -77,7 +82,7 @@ const Gallery = () => {
                 <img
                   src={photos[currentSlide].url}
                   alt={photos[currentSlide].caption}
-                  className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
+                  className={`w-full h-full objectcover object-contain bg-gradient-to-br from-purple-300 to-orange-300 transition-all duration-500 group-hover:scale-105 ${
                     isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
                   }`}
                 />
@@ -85,9 +90,9 @@ const Gallery = () => {
                 <video 
                 src={photos[currentSlide].url}
                 autoPlay
-                controls
+                // controls
                 // muted
-                className='box-border h-full w-full objectcenter object-cove'
+                className='box-border h-full w-full bg-gradient-to-br from-purple-300 to-orange-300 '
                 ></video>
               }
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
