@@ -80,7 +80,7 @@ const Hero = ({ config }: HeroProps) => {
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <div className="mb-8">
           <Heart className="w-16 h-16 text-yellow-400 mx-auto mb-6 animate-bounce" />
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-serif text-white mb-4 animate-fade-in-up">
+          <h1 className="text-3xl sm:text-6xl md:text-8xl font-serif text-white mb-4 animate-fade-in-up">
             {config.name}
           </h1>
           <p className="text-lg sm:text-2xl md:text-3xl text-white mb-6 sm:mb-8 font-light animate-fade-in-up animation-delay-300">
@@ -88,7 +88,7 @@ const Hero = ({ config }: HeroProps) => {
           </p>
         </div>
 
-        <div className="bg-white bg-opacity-95 rounded-2xl p-4 sm:p-6 md:p-8 backdrop-blur-sm shadow-2xl border-2 border-yellow-400 animate-fade-in-up animation-delay-600">
+        <div className="bg-white bg-opacity-95 rounded-2xl p-3 sm:p-6 md:p-8 backdrop-blur-sm shadow-2xl border-2 border-yellow-400 animate-fade-in-up animation-delay-600">
           <div className="flex flex-col md:flex-row items-center justify-center space-y-3 sm:space-y-4 md:space-y-0 md:space-x-8 text-gray-800">
             <div className="flex items-center space-x-2">
               <Calendar className="w-6 h-6 text-yellow-500" />

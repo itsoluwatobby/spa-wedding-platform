@@ -37,7 +37,7 @@ const Contributions = () => {
           </p>
         </div>
 
-        <div className="flex items-center max-sm:flex-col gap-6 mx-auto">
+        <div className="flexitems-centermax-sm:flex-col grid sm:grid-cols-2 gap-6 mx-auto">
           {/* Zelle Section */}
           <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-6 border border-amber-100 w-full">
             <div className="flex items-center mb-6">
