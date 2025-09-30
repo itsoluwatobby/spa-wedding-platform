@@ -1,32 +1,49 @@
 import { useState } from 'react';
-import { Heart, Copy, QrCode, X, DollarSign, CopyCheckIcon } from 'lucide-react';
+import { Heart, Copy, QrCode, X, DollarSign, Building2 } from 'lucide-react';
 import { AccountDetails } from '../utils/constants';
 
 const Contributions = () => {
   const [showQRModal, setShowQRModal] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedAccNo, setCopiedAccNo] = useState(false);
   const [copiedInfo, setCopiedInfo] = useState(false);
+  const [copiedBank1, setCopiedBank1] = useState(false);
+  const [copiedBank2, setCopiedBank2] = useState(false);
 
   const zelleEmail = 'akinolaoluwaseun51@gmail.com';
   const recipientName = 'Akinola Oluwaseun Moses';
 
-  const copyToClipboard = async (text: string, type: 'email' | 'info' | 'acc.no') => {
-    await navigator.clipboard.writeText(text);
+  const copyToClipboard = (text: string, type: 'email' | 'info') => {
+    navigator.clipboard.writeText(text);
     if (type === 'email') {
       setCopiedEmail(true);
       setTimeout(() => setCopiedEmail(false), 2000);
-    } else if (type === 'acc.no') {
-      setCopiedAccNo(true);
-      setTimeout(() => setCopiedAccNo(false), 5000);
     } else {
       setCopiedInfo(true);
       setTimeout(() => setCopiedInfo(false), 2000);
     }
   };
 
+  const copyBankDetails = async (bankKey: 'bank1' | 'bank2') => {
+    const bank = AccountDetails[bankKey];
+    const details = `Bank: ${bank.bankName}\nAccount Name: ${bank.accountName}\nAccount Number: ${bank.accountNumber}`;
+    await navigator.clipboard.writeText(details);
+    
+    if (bankKey === 'bank1') {
+      setCopiedBank1(true);
+      setTimeout(() => setCopiedBank1(false), 2000);
+    } else {
+      setCopiedBank2(true);
+      setTimeout(() => setCopiedBank2(false), 2000);
+    }
+  };
+
+  const copyZelleInfo = () => {
+    const info = `Email: ${zelleEmail}\nRecipient: ${recipientName}`;
+    copyToClipboard(info, 'info');
+  };
+
   return (
-    <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white mx-auto w-full flex flex-col items-center">
+    <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white mx-autow-full flexflex-colitems-center">
       <div className="md:max-w-6xl mx-auto px-4 flex w-full flex-col gap-16 items-center">
         <div className="text-center flex flex-col gap-y-4 items-center">
           <Heart className="w-12 h-12 text-amber-600 mx-auto" />
@@ -37,7 +54,7 @@ const Contributions = () => {
           </p>
         </div>
 
-        <div className="flexitems-centermax-sm:flex-col grid sm:grid-cols-2 gap-6 mx-auto">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6 max-xxs:px-4">
           {/* Zelle Section */}
           <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-5 border border-amber-100 w-full">
             <div className="flex items-center mb-6">
@@ -58,11 +75,11 @@ const Contributions = () => {
                     className="flex-1 p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800"
                   />
                   <button
-                    onClick={() => copyToClipboard(zelleEmail, 'email')}
+                    onClick={copyZelleInfo}
                     className="px-4 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors flex items-center space-x-2"
                   >
                     <Copy className="w-4 h-4" />
-                    <span>{copiedEmail ? 'Copied!' : 'Copy'}</span>
+                    <span>{copiedInfo ? 'Copied!' : 'Copy'}</span>
                   </button>
                 </div>
               </div>
@@ -89,48 +106,95 @@ const Contributions = () => {
           </div>
 
           {/* Bank Details Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-5 border border-amber-100 w-full">
+          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100">
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                <Heart className="w-6 h-6 text-green-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                <Building2 className="w-6 h-6 text-blue-600" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800">Bank Transfer Details</h3>
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800">Nigerian Bank</h3>
             </div>
 
-            <div className="space-y-4 w-full">
+            <div className="space-y-4">
               <div>
-                <p className="text-sm font-medium text-gray-700">Bank Name</p>
-                <p className="text-base font-semibold text-gray-800">{AccountDetails.first.bankName}</p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-700">Account Name</p>
-                <p className="text-base font-semibold text-gray-800">{AccountDetails.first.accountName}</p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-700">Account Number</p>
-                <div className='flex items-center gap-2'>
-                  <p className="text-base font-semibold text-gray-800">{AccountDetails.first.accountNumber}</p>
-                  {
-                    copiedAccNo ?
-                      <CopyCheckIcon size={15}
-                      className="cursor-pointer active:scale-105 text-green-700 transition-all duration-300" />
-                    :
-                      <Copy size={15} 
-                      onClick={() => copyToClipboard(AccountDetails.first.accountNumber, 'acc.no')}
-                      className="cursor-pointer active:scale-105 text-gray-700 transition-all duration-300" />
-                  }
+                <label className="block text-sm font-medium text-gray-700 mb-2">Bank Name</label>
+                <div className="p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 text-sm lg:text-base">
+                  {AccountDetails.bank1.bankName}
                 </div>
               </div>
+
               <div>
-                <p className="text-sm font-medium text-gray-700">Currency</p>
-                <p className="text-base font-semibold text-gray-800">NGN (₦)</p>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Account Name</label>
+                <div className="p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 text-sm lg:text-base">
+                  {AccountDetails.bank1.accountName}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Account Number</label>
+                <div className="p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 text-sm lg:text-base font-mono">
+                  {AccountDetails.bank1.accountNumber}
+                </div>
               </div>
             </div>
 
-            <p className="text-sm text-gray-600 mt-6 text-center">
-              Please make your payment to the account details above
+            <button
+              onClick={() => copyBankDetails('bank1')}
+              className="w-full mt-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center justify-center space-x-2"
+            >
+              <Copy className="w-4 h-4" />
+              <span>{copiedBank1 ? 'Copied!' : 'Copy Bank Details'}</span>
+            </button>
+
+            <p className="text-xs sm:text-sm text-gray-600 mt-4 text-center">
+              Use these details for bank transfers within Nigeria
             </p>
           </div>
+
+          {/* Bank Details 2 */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                <Building2 className="w-6 h-6 text-green-600" />
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800">Alternative Bank</h3>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Bank Name</label>
+                <div className="p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 text-sm lg:text-base">
+                  {AccountDetails.bank2.bankName}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Account Name</label>
+                <div className="p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 text-sm lg:text-base">
+                  {AccountDetails.bank2.accountName}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Account Number</label>
+                <div className="p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 text-sm lg:text-base font-mono">
+                  {AccountDetails.bank2.accountNumber}
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => copyBankDetails('bank2')}
+              className="w-full mt-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center justify-center space-x-2"
+            >
+              <Copy className="w-4 h-4" />
+              <span>{copiedBank2 ? 'Copied!' : 'Copy Bank Details'}</span>
+            </button>
+
+            <p className="text-xs sm:text-sm text-gray-600 mt-4 text-center">
+              Alternative bank option for your convenience
+            </p>
+          </div>
+
         </div>
 
         {/* Thank You Message */}

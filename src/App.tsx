@@ -5,6 +5,7 @@ import Gallery from './components/Gallery';
 import Invitation from './components/Invitation';
 import RSVP from './components/RSVP';
 import Contributions from './components/Contributions';
+import AccessCards from './components/AccessCards';
 import Footer from './components/Footer';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
@@ -78,6 +79,7 @@ function App() {
         <Story />
         <Gallery />
         <Invitation googleMapsLink={config.location.googleMapsLink}/>
+        {/* <AccessCards /> */}
         <RSVP />
         <Contributions />
       </main>
