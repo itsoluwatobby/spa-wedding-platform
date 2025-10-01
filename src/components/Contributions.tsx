@@ -80,7 +80,7 @@ const Contributions = () => {
               <h3 className="text-2xl font-bold text-gray-800">Zelle</h3>
             </div>
             
-            <div className="space-y-4 w-full">
+            <div className="w-full flex flex-col justify-center gap-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                 <div className="flex items-center space-x-2">
