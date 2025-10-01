@@ -99,7 +99,7 @@ const Hero = ({ config }: HeroProps) => {
               href={config.location.googleMapsLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-sm sm:text-lg font-medium sm:space-x-2 space-x-1 cursor-pointer"
+              className="flex items-center max-xxs:text-xs text-sm sm:text-lg font-medium sm:space-x-2 space-x-1 cursor-pointer"
               title="View location on Google Maps"
             >
               <MapPin className="w-6 h-6 text-yellow-500 mr-2" />
