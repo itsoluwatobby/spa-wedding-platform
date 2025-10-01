@@ -12,6 +12,11 @@ const Gallery = () => {
       type: "image"
     },
     {
+      url: "/images/together2.jpg",
+      caption: "",
+      type: "image"
+    },
+    {
       url: "/images/together3.jpg",
       caption: "Adventure together",
       type: "image"

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Heart, User, Phone, Users, MessageSquare, LoaderIcon } from 'lucide-react';
-import { sanitizeEntries } from '../utils/helpers';
+import React, {  useState } from 'react';
+import { Send, Heart, User, Phone, Users, MessageSquare, LoaderIcon, MailIcon } from 'lucide-react';
+import { generateDeviceFingerprint, sanitizeEntries } from '../utils/helpers';
 import { toast } from 'react-toastify';
 
 const initAppState = { isLoading: false, error: '' };
@@ -8,6 +8,7 @@ const initAppState = { isLoading: false, error: '' };
 const initFormData = {
   name: '',
   phone: '',
+  email: '',
   guests: '1',
   message: '',
   attending: ''
@@ -20,8 +21,27 @@ const RSVP = () => {
 
   const { isLoading } = appState;
 
-  const { message, ...others } = formData;
-  const canSubmit = [...Object.values(others)].every(Boolean);
+  const { message, email, phone, ...others } = formData;
+
+  const anyOfPhoneOrEmail = [phone, email].some(Boolean)
+  const canSubmit = [...Object.values(others), anyOfPhoneOrEmail].every(Boolean);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const res = await fetch('https://audio-book-server.onrender.com/api/v1/sheet/fetch', {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         },
+  //       })
+  //       const data = await res.json();
+  //       console.log(data);
+  //     } catch(err: any) {
+  //       console.log(err.message)
+  //     }
+  //   })();
+  // }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,35 +49,50 @@ const RSVP = () => {
 
     setAppState(prev => ({ ...prev, isLoading: true }));
     try {
-      // const apiUrl = import.meta.env.VITE_CONNECTION_URL
       const date = new Intl.DateTimeFormat('en-us', {
         dateStyle: 'medium'
       }).format(new Date())
       let newEntry = {
         date: date,
         name: formData.name,
+        email: formData.email,
         phone: formData.phone,
         attending: formData.attending,
         guests: formData.guests,
-        message: formData.message
+        message: formData.message,
+        deviceFingerprint: generateDeviceFingerprint(),
       };
 
       newEntry = sanitizeEntries(newEntry);
-      await fetch('https://script.google.com/macros/s/AKfycbwDA7K7u_3qNSn9JO_dGc002Al2DdM5OEERuZOXRCBZw9ewbXUVnNGcsy8FuM-nUdYIPw/exec', {
+      await fetch('https://audio-book-server.onrender.com/api/v1/sheet/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(newEntry),
-        mode: 'no-cors'
       })
 
+      const files = [
+        '/images/invitation_card.png',
+        '/images/access_card_front.png',
+        '/images/access_card_back.png'
+      ];
+
+      files.forEach(file => {
+        if (file) {
+          const anchor = document.createElement('a');
+          anchor.href = file;
+          anchor.download = file.split('/').pop() ?? "";
+          document.body.appendChild(anchor);
+          anchor.click();
+          document.body.removeChild(anchor);
+        }
+      });
       toast.success('Response recorded, Please print your Invitation Card');
       setFormData(initFormData);
       setIsSubmitted(true);
     }
     catch (error: any) {
-      // setPrintIv('OPEN')
       console.log(error.message)
       setAppState(prev => ({ ...prev, error: '' }));
       toast.error('Fail to submit')
@@ -86,6 +121,9 @@ const RSVP = () => {
             </p>
             <p className="text-gray-600">
               We can't wait to celebrate with you on our special day!
+            </p>
+            <p className="text-gray-600 font-medium mt-4">
+              Invitation and access cards have been downloaded to your device. If not found, please download from the sections above.
             </p>
             <button
               onClick={() => setIsSubmitted(false)}
@@ -173,11 +211,28 @@ const RSVP = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  required
+                  // required
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
                   placeholder="(555) 123-4567"
                 />
               </div>
+            </div>
+
+            <div>
+              <label htmlFor="email" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                <MailIcon className="w-5 h-5 text-yellow-500" />
+                <span>Email *</span>
+              </label>
+              <input
+                type="tel"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                // required
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                placeholder="johndoe@gmail.com"
+              />
             </div>
 
             <div className='max-xxs:text-base'>
