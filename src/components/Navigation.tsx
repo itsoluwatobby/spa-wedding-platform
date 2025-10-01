@@ -44,7 +44,7 @@ const Navigation = ({ name}: NotificationProps) => {
               { label: 'Gallery', id: 'gallery' },
               { label: 'Invitation', id: 'invitation' },
               { label: 'RSVP', id: 'rsvp' },
-              { label: 'Gifts', id: 'contributions' }
+              { label: 'Gifts', id: 'gifts' }
             ].map((item) => (
               <button
                 key={item.id}

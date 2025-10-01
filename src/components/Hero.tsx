@@ -80,7 +80,7 @@ const Hero = ({ config }: HeroProps) => {
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <div className="mb-8">
           <Heart className="w-16 h-16 text-yellow-400 mx-auto mb-6 animate-bounce" />
-          <h1 className="text-3xl sm:text-6xl md:text-8xl font-serif text-white mb-4 animate-fade-in-up">
+          <h1 className="text-3xl xs:text-5xl sm:text-6xl md:text-8xl font-serif text-white mb-4 animate-fade-in-up">
             {config.name}
           </h1>
           <p className="text-lg sm:text-2xl md:text-3xl text-white mb-6 sm:mb-8 font-light animate-fade-in-up animation-delay-300">
@@ -99,7 +99,7 @@ const Hero = ({ config }: HeroProps) => {
               href={config.location.googleMapsLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-sm sm:text-lg font-medium sm:space-x-2 space-x-1 cursor-pointer"
+              className="flex items-center max-xxs:text-xs text-sm sm:text-lg font-medium sm:space-x-2 space-x-1 cursor-pointer"
               title="View location on Google Maps"
             >
               <MapPin className="w-6 h-6 text-yellow-500 mr-2" />
