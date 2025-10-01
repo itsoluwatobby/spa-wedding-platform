@@ -26,7 +26,7 @@ const AccessCards = () => {
           <CreditCard className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
           <h2 className="text-3xl md:text-4xl font-serif text-gray-800 mb-6">Access Cards</h2>
           <p className="text-xl max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Download the access card for our special day. Present these at the venue for entry.
+            Download the access card for our special day. Present it at the venue for entry.
           </p>
         </div>
 
@@ -48,7 +48,7 @@ const AccessCards = () => {
   
           <div className="mt-6 text-center ">
             <h4 className="text-xl font-bold text-gray-800 mb-2">Access Card</h4>
-            <p className="text-gray-600 mb-4">Access card need to be presented to gain entry</p>
+            <p className="text-gray-600 mb-4">The access card must be presented to gain entry.</p>
             <button
               onClick={handleDownload}
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white font-semibold rounded-full hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
