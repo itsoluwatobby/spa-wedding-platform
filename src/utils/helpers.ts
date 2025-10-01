@@ -36,3 +36,26 @@ export function sanitizeEntries<T extends object>(entries: T): T {
   })
   return Object.fromEntries(sanitizedValues)
 }
+
+export function generateDeviceFingerprint() {
+  let deviceId = localStorage.getItem('deviceId');
+  if (!deviceId) {
+      const navigator = window.navigator;
+      const screen = window.screen;
+      const fingerprint = [
+          navigator.userAgent,
+          navigator.language,
+          screen.width,
+          screen.height,
+          new Date().getTimezoneOffset()
+      ].join('|');
+      let hash = 0;
+      for (let i = 0; i < fingerprint.length; i++) {
+          hash = ((hash << 5) - hash) + fingerprint.charCodeAt(i);
+          hash = hash & hash;
+      }
+      deviceId = 'device_' + Math.abs(hash).toString(36);
+      localStorage.setItem('deviceId', deviceId);
+  }
+  return deviceId;
+}

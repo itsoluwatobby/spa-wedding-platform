@@ -79,7 +79,7 @@ function App() {
         <Story />
         <Gallery />
         <Invitation googleMapsLink={config.location.googleMapsLink}/>
-        {/* <AccessCards /> */}
+        <AccessCards />
         <RSVP />
         <Contributions />
       </main>
