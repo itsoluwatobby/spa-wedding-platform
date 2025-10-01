@@ -83,12 +83,12 @@ const Contributions = () => {
             <div className="w-full flex flex-col justify-center gap-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-x-2">
                   <input
                     type="text"
                     value={zelleEmail}
                     readOnly
-                    className="flex-1 p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800"
+                    className="flex1 w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800"
                   />
                   <button
                     onClick={copyZelleInfo}
