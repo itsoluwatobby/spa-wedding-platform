@@ -72,7 +72,7 @@ const Contributions = () => {
 
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6 max-xxs:place-items-center">
           {/* Zelle Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-5 border border-amber-100 w-full max-xxs:w-[95%]">
+          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-5 border border-amber-100 w-fullmax-xxs:w-[95%]">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                 <DollarSign className="w-6 h-6 text-blue-600" />
@@ -122,7 +122,7 @@ const Contributions = () => {
           </div>
 
           {/* Bank Details Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100 w-full max-xxs:w-[95%]">
+          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100 w-fullmax-xxs:w-[95%]">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                 <Building2 className="w-6 h-6 text-blue-600" />
@@ -167,7 +167,7 @@ const Contributions = () => {
           </div>
 
           {/* Bank Details 2 */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100 w-full max-xxs:w-[95%]">
+          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100 w-fullmax-xxs:w-[95%]">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
                 <Building2 className="w-6 h-6 text-green-600" />
