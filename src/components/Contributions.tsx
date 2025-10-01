@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Heart, Copy, QrCode, X, DollarSign, Building2 } from 'lucide-react';
 import { AccountDetails } from '../utils/constants';
 
@@ -9,8 +9,24 @@ const Contributions = () => {
   const [copiedBank1, setCopiedBank1] = useState(false);
   const [copiedBank2, setCopiedBank2] = useState(false);
 
+  const modalRef = useRef<HTMLDivElement>(null)
+
   const zelleEmail = 'akinolaoluwaseun51@gmail.com';
   const recipientName = 'Akinola Oluwaseun Moses';
+
+  useEffect(() => {
+    const handleModalToggleOff = (event: any) => {
+      if (!modalRef.current) return;
+      if (!modalRef.current.contains(event.target)) {
+        setShowQRModal(false);
+      }
+    }
+    document.addEventListener('mousedown', handleModalToggleOff);
+
+    return () => {
+      document.removeEventListener('mousedown', handleModalToggleOff);
+    }
+  }, [modalRef])
 
   const copyToClipboard = (text: string, type: 'email' | 'info') => {
     navigator.clipboard.writeText(text);
@@ -43,7 +59,7 @@ const Contributions = () => {
   };
 
   return (
-    <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white mx-autow-full flexflex-colitems-center">
+    <section id="gifts" className="py-20 bg-gradient-to-br from-amber-50 to-white">
       <div className="md:max-w-6xl mx-auto px-4 flex w-full flex-col gap-16 items-center">
         <div className="text-center flex flex-col gap-y-4 items-center">
           <Heart className="w-12 h-12 text-amber-600 mx-auto" />
@@ -54,9 +70,9 @@ const Contributions = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6 max-xxs:place-items-center">
           {/* Zelle Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-5 border border-amber-100 w-full">
+          <div className="bg-white rounded-2xl shadow-lg p-8 max-xxs:p-5 border border-amber-100 w-full max-xxs:w-[95%]">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                 <DollarSign className="w-6 h-6 text-blue-600" />
@@ -106,7 +122,7 @@ const Contributions = () => {
           </div>
 
           {/* Bank Details Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100">
+          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100 w-full max-xxs:w-[95%]">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                 <Building2 className="w-6 h-6 text-blue-600" />
@@ -151,7 +167,7 @@ const Contributions = () => {
           </div>
 
           {/* Bank Details 2 */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100">
+          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-amber-100 w-full max-xxs:w-[95%]">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
                 <Building2 className="w-6 h-6 text-green-600" />
@@ -209,9 +225,11 @@ const Contributions = () => {
       </div>
 
       {/* QR Code Modal */}
-      {showQRModal && (
+      {showQRModal ? (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 p-4 w-full">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
+          <div 
+          ref={modalRef}
+          className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
             <button
               onClick={() => setShowQRModal(false)}
               className="absolute top-4 right-4 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
@@ -252,7 +270,7 @@ const Contributions = () => {
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </section>
   );
 };
