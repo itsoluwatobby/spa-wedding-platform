@@ -62,23 +62,15 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
         body: JSON.stringify(newEntry),
       })
 
-      const files = [
-        '/images/invitation_card.png',
-        // '/images/access_card_front.png',
-        // '/images/access_card_back.png'
-      ];
-
-      files.forEach(file => {
-        if (file) {
-          const anchor = document.createElement('a');
-          anchor.href = file;
-          anchor.download = file.split('/').pop() ?? "";
-          document.body.appendChild(anchor);
-          anchor.click();
-          document.body.removeChild(anchor);
-        }
-      });
       refetch();
+
+      const anchor = document.createElement('a');
+      anchor.href = '/images/invitation_card.png';
+      anchor.download = "invitation_card.png";
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+
       toast.success('Response recorded, Please print your Invitation Card');
       setFormData(initFormData);
       setIsSubmitted(true);
@@ -116,12 +108,9 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
             <p className="text-gray-600 font-medium mt-4">
               The invitation card has been downloaded to your device. If you can't find it, please download it from the sections above.
             </p>
-            {/* <button
-              onClick={() => setIsSubmitted(false)}
-              className="mt-8 text-yellow-500 hover:text-yellow-600 font-semibold"
-            >
-              Submit Another RSVP
-            </button> */}
+            <p className="text-green-600 mt-4">
+              Download your personalized access card below.
+            </p>
           </div>
         </div>
       </section>
