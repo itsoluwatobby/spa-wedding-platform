@@ -204,7 +204,7 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
                 <span>Email *</span>
               </label>
               <input
-                type="tel"
+                type="email"
                 id="email"
                 name="email"
                 value={formData.email}
