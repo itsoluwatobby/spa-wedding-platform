@@ -28,7 +28,7 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps) => {
           <CreditCard className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
           <h2 className="text-3xl md:text-4xl font-serif text-gray-800 mb-4">Access Cards</h2>
           <p className="text-lg max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Get your personalized the access card for our special day. Present it at the venue for entry.
+            Get your personalized the access card for our special day by filling the <b>RSVP</b> form above. Present it at the venue for entry.
           </p>
         </div>
 

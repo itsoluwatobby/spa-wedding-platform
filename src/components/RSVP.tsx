@@ -116,12 +116,9 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
             <p className="text-gray-600 font-medium mt-4">
               The invitation card has been downloaded to your device. If you can't find it, please download it from the sections above.
             </p>
-            {/* <button
-              onClick={() => setIsSubmitted(false)}
-              className="mt-8 text-yellow-500 hover:text-yellow-600 font-semibold"
-            >
-              Submit Another RSVP
-            </button> */}
+            <p className="text-green-600 mt-4">
+              Download your personalized access card below.
+            </p>
           </div>
         </div>
       </section>
