@@ -62,23 +62,15 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
         body: JSON.stringify(newEntry),
       })
 
-      const files = [
-        '/images/invitation_card.png',
-        // '/images/access_card_front.png',
-        // '/images/access_card_back.png'
-      ];
-
-      files.forEach(file => {
-        if (file) {
-          const anchor = document.createElement('a');
-          anchor.href = file;
-          anchor.download = file.split('/').pop() ?? "";
-          document.body.appendChild(anchor);
-          anchor.click();
-          document.body.removeChild(anchor);
-        }
-      });
       refetch();
+
+      const anchor = document.createElement('a');
+      anchor.href = '/images/invitation_card.png';
+      anchor.download = "invitation_card.png";
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+
       toast.success('Response recorded, Please print your Invitation Card');
       setFormData(initFormData);
       setIsSubmitted(true);
