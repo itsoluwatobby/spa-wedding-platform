@@ -37,7 +37,7 @@ export function sanitizeEntries<T extends object>(entries: T): T {
   return Object.fromEntries(sanitizedValues)
 }
 
-export function generateDeviceFingerprint() {
+export function getDeviceFingerprint() {
   let deviceId = localStorage.getItem('deviceId');
   if (!deviceId) {
       const navigator = window.navigator;

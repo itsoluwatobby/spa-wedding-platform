@@ -1,34 +1,12 @@
-import React, { useEffect } from 'react';
-import { Heart, Star, Calendar, ChevronLeft, ChevronRight, SignalHighIcon, Badge } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Heart, Star, ChevronLeft, ChevronRight, SignalHighIcon, Badge } from 'lucide-react';
+import { useIntersectionObserver } from '../hooks/useIntersection';
 
-const useIntersectionObserver = (options = {}) => {
-  const [isVisible, setIsVisible] = React.useState(false);
-  const [hasAnimated, setHasAnimated] = React.useState(false);
-  const elementRef = React.useRef(null);
-
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !hasAnimated) {
-        setIsVisible(true);
-        setHasAnimated(true);
-      }
-    }, { threshold: 0.3, ...options });
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [hasAnimated]);
-
-  return { elementRef, isVisible };
-};
 
 const Story = () => {
-  const MaxWrodLength = 500
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [isAutoScrolling, setIsAutoScrolling] = React.useState(true);
-  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const { elementRef: titleRef, isVisible: titleVisible } = useIntersectionObserver();
   const { elementRef: quoteRef, isVisible: quoteVisible } = useIntersectionObserver();
@@ -151,7 +129,7 @@ const Story = () => {
   // Duplicate milestones for infinite scroll effect
   const infiniteMilestones = [...milestones, ...milestones, ...milestones];
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isAutoScrolling) return;
 
     const interval = setInterval(() => {
