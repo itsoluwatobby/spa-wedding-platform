@@ -1,7 +1,14 @@
 import React, {  useState } from 'react';
 import { Send, Heart, User, Phone, Users, MessageSquare, LoaderIcon, MailIcon } from 'lucide-react';
-import { generateDeviceFingerprint, sanitizeEntries } from '../utils/helpers';
+import { getDeviceFingerprint, sanitizeEntries } from '../utils/helpers';
 import { toast } from 'react-toastify';
+
+
+type RSVPProps = {
+  // data: SuccessResponse['data'],
+  hasSubmitted: boolean;
+  refetch: () => void;
+}
 
 const initAppState = { isLoading: false, error: '' };
 
@@ -14,7 +21,7 @@ const initFormData = {
   attending: ''
 };
 
-const RSVP = () => {
+const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
   const [appState, setAppState] = useState<typeof initAppState>(initAppState);
   const [formData, setFormData] = useState(initFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -25,23 +32,6 @@ const RSVP = () => {
 
   const anyOfPhoneOrEmail = [phone, email].some(Boolean)
   const canSubmit = [...Object.values(others), anyOfPhoneOrEmail].every(Boolean);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const res = await fetch('https://audio-book-server.onrender.com/api/v1/sheet/fetch', {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         },
-  //       })
-  //       const data = await res.json();
-  //       console.log(data);
-  //     } catch(err: any) {
-  //       console.log(err.message)
-  //     }
-  //   })();
-  // }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,11 +50,11 @@ const RSVP = () => {
         attending: formData.attending,
         guests: formData.guests,
         message: formData.message,
-        deviceFingerprint: generateDeviceFingerprint(),
+        deviceFingerprint: getDeviceFingerprint(),
       };
 
       newEntry = sanitizeEntries(newEntry);
-      await fetch('https://audio-book-server.onrender.com/api/v1/sheet/submit', {
+      await fetch(`${import.meta.env.VITE_BASE_URL}/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -74,8 +64,8 @@ const RSVP = () => {
 
       const files = [
         '/images/invitation_card.png',
-        '/images/access_card_front.png',
-        '/images/access_card_back.png'
+        // '/images/access_card_front.png',
+        // '/images/access_card_back.png'
       ];
 
       files.forEach(file => {
@@ -88,6 +78,7 @@ const RSVP = () => {
           document.body.removeChild(anchor);
         }
       });
+      refetch();
       toast.success('Response recorded, Please print your Invitation Card');
       setFormData(initFormData);
       setIsSubmitted(true);
@@ -109,11 +100,11 @@ const RSVP = () => {
     });
   };
 
-  if (isSubmitted) {
+  if (isSubmitted || hasSubmitted) {
     return (
       <section id="rsvp" className="py-20 bg-gradient-to-br from-yellow-50 to-white w-full">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <div className="bg-white rounded-3xl p-12 shadow-2xl border-2 border-yellow-300">
+          <div className="bg-white rounded-3xl p-10 shadow-2xl border-2 border-yellow-300">
             <Heart className="w-16 h-16 text-yellow-400 mx-auto mb-6 animate-bounce" />
             <h2 className="text-4xl font-serif text-gray-800 mb-6">Thank You!</h2>
             <p className="text-xl text-gray-600 mb-4">
@@ -123,14 +114,14 @@ const RSVP = () => {
               We can't wait to celebrate with you on our special day!
             </p>
             <p className="text-gray-600 font-medium mt-4">
-              Invitation and access cards have been downloaded to your device. If not found, please download from the sections above.
+              The invitation card has been downloaded to your device. If you can't find it, please download it from the sections above.
             </p>
-            <button
+            {/* <button
               onClick={() => setIsSubmitted(false)}
               className="mt-8 text-yellow-500 hover:text-yellow-600 font-semibold"
             >
               Submit Another RSVP
-            </button>
+            </button> */}
           </div>
         </div>
       </section>

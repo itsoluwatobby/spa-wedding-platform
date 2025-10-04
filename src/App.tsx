@@ -11,8 +11,11 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { useHasSubmitted } from './hooks/useHasSubmitted';
 
 function App() {
+  const { data, hasSubmitted, refetch } = useHasSubmitted();
+
   const [config] = useState<AppConfig>(
     {
       date: "December 27, 2025",
@@ -79,8 +82,15 @@ function App() {
         <Story />
         <Gallery />
         <Invitation googleMapsLink={config.location.googleMapsLink}/>
-        <AccessCards />
-        <RSVP />
+        <RSVP 
+          // data={data}
+          refetch={refetch}
+          hasSubmitted={hasSubmitted}
+        />
+        <AccessCards 
+          data={data}
+          hasSubmitted={hasSubmitted}
+        />
         <Contributions />
       </main>
       <Footer config={config} />

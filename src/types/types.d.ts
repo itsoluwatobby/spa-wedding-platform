@@ -19,3 +19,27 @@ type AppConfig = {
 type IsIntersectingType = 'SWITCH' | 'STOP'
 
 type Toggle = 'OPEN' | 'CLOSE'
+
+type AttendanceProps = 'YES' | 'NO'
+
+type ResponseObj = {
+  timestamp: string;
+  statusCode: number;
+  message: string;
+}
+
+type ErrorResponse = ResponseObj & { error: null }
+
+type SuccessResponse = ResponseObj & {
+	data: {
+		Date: string;
+		Name: string,
+		Email: string,
+		Phone: number | string,
+		Attending: AttendanceProps,
+		Guests: number,
+		Message: string,
+		DeviceFingerprint: string,
+		CardId: number
+	}
+}

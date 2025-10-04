@@ -1,61 +1,88 @@
+import { useRef } from 'react';
+import html2canvas from 'html2canvas';
 import { CreditCard, Download } from 'lucide-react';
 
-const AccessCards = () => {
-  const handleDownload = () => {
-    const files = [
-      '/images/access_card_front.png',
-      '/images/access_card_back.png'
-    ];
+type AccessCardProps = {
+  hasSubmitted: boolean;
+  data: SuccessResponse['data'];
+}
 
-    files.forEach(file => {
-      if (file) {
-        const anchor = document.createElement('a');
-        anchor.href = file;
-        anchor.download = file.split('/').pop() ?? "";
-        document.body.appendChild(anchor);
-        anchor.click();
-        document.body.removeChild(anchor);
-      }
-    });
+const AccessCards = ({ data, hasSubmitted }: AccessCardProps) => {
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  const convertToImage = async () => {
+    if (!componentRef.current) return;
+    const canvas = await html2canvas(componentRef.current);
+    const image = canvas.toDataURL('image/png');
+    // Use the image (e.g., download or display)
+    const link = document.createElement('a');
+    link.href = image;
+    link.download = `${data.Name}-access card.png`;
+    link.click();
   };
 
   return (
     <section id="access-cards" className="transition-all py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <CreditCard className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
-          <h2 className="text-3xl md:text-4xl font-serif text-gray-800 mb-6">Access Cards</h2>
-          <p className="text-xl max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Download the access card for our special day. Present it at the venue for entry.
+          <h2 className="text-3xl md:text-4xl font-serif text-gray-800 mb-4">Access Cards</h2>
+          <p className="text-lg max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Get your personalized the access card for our special day. Present it at the venue for entry.
           </p>
         </div>
 
-        <div className='flex flex-col gap-8 w-full itemscenter'>
-          <div className="grid md:grid-cols-2 gap-8 max-w4xl w-full place-items-center">
-            <img
-              src="/images/access_card_front.png"
-              alt="Wedding Background"
-              className="w-full h-full object-cover max-md:w-[50vw] max-xs:w-[85%]"
-            />
+        <div className='flex flex-col gap-4 w-full items-center'>
+          <div 
+          ref={componentRef}
+          className="grid md:grid-cols-2 gap-8 max-w4xl wfull place-items-center p-5">
+            <figure className='relative w-full h-full max-md:w-[32rem]'>
+              <img
+                src="/images/access_card_front.png"
+                alt="Wedding Background"
+                className="w-full h-full object-cover"
+              />
+              {
+                data?.Name ?
+                <p className='absolute right-5 text-end bottom-[4.7rem] p-0.5 px-2.5 pb-1 line-clamp-1 font-semibold text-xl w-[60%] text-white'>
+                {data.Name}
+                </p>
+                : null
+              }
+
+              {
+                data?.CardId ?
+                <div className='absolute left-[40%] bottom-[10rem] pb-5 px-2.5 line-clamp-1 p-1 pt-0 rounded-t-lg rounded-b-xl text-gray-100'>
+                  <p className='w-full text-end text-5xl font-mono'>
+                    {/* ID. <span className='font-semibold'>{data.CardId}</span> */}
+                    {data.CardId}
+                  </p>
+                </div>
+                : null
+              }
+            </figure>
             
             <img
               src="/images/access_card_back.png"
               alt="Wedding Background"
-              className="w-full h-full object-cover max-md:w-[50vw] max-xs:w-[85%]"
+              className="w-full h-full object-cover max-md:w-[32rem]"
             />
-            
           </div>
   
           <div className="mt-6 text-center ">
             <h4 className="text-xl font-bold text-gray-800 mb-2">Access Card</h4>
             <p className="text-gray-600 mb-4">The access card must be presented to gain entry.</p>
-            <button
-              onClick={handleDownload}
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white font-semibold rounded-full hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
-            >
-              <Download className="w-5 h-5 mr-2" />
-              Download Card
-            </button>
+            {
+              hasSubmitted ?
+              <button
+                onClick={convertToImage}
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white font-semibold rounded-full hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Download Card
+              </button>
+              : null
+            }
           </div>
         </div>
 

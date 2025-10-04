@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Heart } from 'lucide-react';
+import { useIntersectionObserver } from '../hooks/useIntersection';
 
 const Gallery = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const { elementRef, isVisible } = useIntersectionObserver();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const photos = [
     {
@@ -22,8 +26,8 @@ const Gallery = () => {
       type: "image"
     },
     {
-      url: "/video/lovely-moments.mp4",
-      caption: "Lovely Moments",
+      url: "/video/proposal.mp4",
+      caption: "The Proposal",
       type: "video"
     },
     {
@@ -32,12 +36,12 @@ const Gallery = () => {
       type: "image"
     },
     {
-      url: "/images/bride6.jpg",
+      url: "/images/bride7.jpg",
       caption: "Odugwu's Madam",
       type: "image"
     },
     {
-      url: "/images/together4.jpg",
+      url: "/images/together1.jpg",
       caption: "Beautiful",
       type: "image"
     },
@@ -46,6 +50,17 @@ const Gallery = () => {
     //   caption: "Celebrating love"
     // }
   ];
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      if (!isVisible && !video.paused) {
+        video.pause();
+      } else if (photos[currentSlide].type === "video") {
+        video.play();
+      }
+    }
+  }, [isVisible, currentSlide])
 
   const nextSlide = () => {
     if (isTransitioning) return;
@@ -81,7 +96,9 @@ const Gallery = () => {
         <div className="relative max-w-4xl mx-auto">
           {/* Main Slideshow */}
           <div className="relative overflow-hidden rounded-3xl shadow-2xl group">
-            <div className="aspect-w-16 aspect-h-9 h-96 md:h-[500px]">
+            <div 
+            ref={elementRef}
+            className="aspect-w-16 aspect-h-9 h-96 md:h-[500px]">
               {
                 photos[currentSlide].type === "image" ?
                 <img
@@ -93,6 +110,7 @@ const Gallery = () => {
                 />
                 : 
                 <video 
+                ref={videoRef}
                 src={photos[currentSlide].url}
                 autoPlay
                 // controls
@@ -127,7 +145,7 @@ const Gallery = () => {
           </div>
 
           {/* Thumbnail Navigation */}
-          <div className="flex justify-center mt-8 space-x-4 overflow-x-auto pb-4">
+          <div className="flex justify-center mt-8 space-x-4 overflow-x-auto pb-4 pt-2">
             {photos.map((photo, index) => (
               <button
                 key={index}
