@@ -74,6 +74,12 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
       toast.success('Response recorded, Please print your Invitation Card');
       setFormData(initFormData);
       setIsSubmitted(true);
+
+      setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = '#access-cards';
+        link.click();
+      }, 3000);
     }
     catch (error: any) {
       console.log(error.message)
@@ -109,7 +115,7 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
               The invitation card has been downloaded to your device. If you can't find it, please download it from the sections above.
             </p>
             <p className="text-green-600 mt-4">
-              Download your personalized access card below.
+              <a href="#access-cards">Download your personalized access card below.</a>
             </p>
           </div>
         </div>

@@ -87,11 +87,11 @@ function App() {
           refetch={refetch}
           hasSubmitted={hasSubmitted}
         />
+        <Contributions />
         <AccessCards 
           data={data}
           hasSubmitted={hasSubmitted}
         />
-        <Contributions />
       </main>
       <Footer config={config} />
 

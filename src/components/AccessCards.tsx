@@ -22,7 +22,7 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps) => {
   };
 
   return (
-    <section id="access-cards" className="transition-all py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section className="transition-all py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-10">
           <CreditCard className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
@@ -32,7 +32,7 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps) => {
           </p>
         </div>
 
-        <div className='flex flex-col gap-4 w-full items-center'>
+        <div id="access-cards" className='flex flex-col gap-4 w-full items-center'>
           <div 
           ref={componentRef}
           className="grid md:grid-cols-2 gap-8 max-w4xl wfull place-items-center p-5">
@@ -44,8 +44,8 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps) => {
               />
               {
                 data?.Name ?
-                <p className='absolute right-5 text-end bottom-[4.7rem] p-0.5 px-2.5 pb-1 line-clamp-1 font-semibold text-xl w-[60%] text-white'>
-                {data.Name}
+                <p className='absolute right-5 text-end bottom-[4.7rem] p-0.5 px-2.5 pb-2 line-clamp-1 font-semibold text-xl w-[60%] text-white'>
+                {data.Name}<span className='font-bold text-4xl italic tracking-tighter'>+{data.Guests}</span>
                 </p>
                 : null
               }
