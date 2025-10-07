@@ -1,5 +1,5 @@
 import React, {  useState } from 'react';
-import { Send, Heart, User, Phone, Users, MessageSquare, LoaderIcon, MailIcon } from 'lucide-react';
+import { Send, Heart, User, Phone, Users, MessageSquare, LoaderIcon, MailIcon, Shirt } from 'lucide-react';
 import { getDeviceFingerprint, sanitizeEntries } from '../utils/helpers';
 import { toast } from 'react-toastify';
 
@@ -18,7 +18,9 @@ const initFormData = {
   email: '',
   guests: '1',
   message: '',
-  attending: ''
+  attending: '',
+  fila: '',
+  gele: '',
 };
 
 const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
@@ -28,13 +30,30 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
 
   const { isLoading } = appState;
 
-  const { message, email, phone, ...others } = formData;
+  const { message, email, phone, fila, gele, ...others } = formData;
 
   const anyOfPhoneOrEmail = [phone, email].some(Boolean)
-  const canSubmit = [...Object.values(others), anyOfPhoneOrEmail].every(Boolean);
+  const anyOfFilaOrGele = [fila, gele].some(Boolean)
+  const canSubmit = [
+    ...Object.values(others),
+    anyOfPhoneOrEmail,
+    anyOfFilaOrGele,
+  ].every(Boolean);
+
+  const validateInput = () => {
+    const reqObj = {} as any;
+    Object.entries(others).forEach(([key, val]) => {
+      if (!val?.trim()) reqObj[key] = false;
+    });
+
+    const errMsg = Object.keys(reqObj).join(', ');
+    setAppState(prev => ({ ...prev, error: errMsg }));
+    return Object.keys(reqObj)?.length < 1;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateInput()) return;
     if (isLoading || !canSubmit) return;
 
     setAppState(prev => ({ ...prev, isLoading: true }));
@@ -49,6 +68,8 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
         phone: formData.phone,
         attending: formData.attending,
         guests: formData.guests,
+        fila: formData.fila,
+        gele: formData.gele,
         message: formData.message,
         deviceFingerprint: getDeviceFingerprint(),
       };
@@ -114,6 +135,10 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
             <p className="text-gray-600 font-medium mt-4">
               The invitation card has been downloaded to your device. If you can't find it, please download it from the sections above.
             </p>
+
+            <div className='bg-gray-100 font-mono rounded-lg p-3 text-sm text-gray-800 mt-2'>Delivery of materials will come with extra cost: for further details call <a href="tel:+2349058936016" className='font-semibold'>(+234) 9058936016</a> or <a href="tel:+2348025893272" className='font-semibold'>(+234) 8025893272</a>
+            </div>
+
             <p className="text-green-600 mt-4">
               <a href="#access-cards">Download your personalized access card below.</a>
             </p>
@@ -221,6 +246,39 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
               />
             </div>
 
+            <div className="flex flex-col">
+              <div className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                <Shirt className="w-5 h-5 text-yellow-500" />
+                <span>Outfit Materials (Color code: Pink & White) *</span>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <input
+                  type="number"
+                  id="fila"
+                  name="fila"
+                  value={formData.fila}
+                  onChange={handleInputChange}
+                  // required
+                  min={1}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                  placeholder="Enter Number of Fila"
+                />
+
+                <input
+                  type="number"
+                  id="gele"
+                  name="gele"
+                  value={formData.gele}
+                  onChange={handleInputChange}
+                  // required
+                  min={1}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                  placeholder="Enter Number of Gele"
+                />
+              </div>
+              <div className='text-sm text-gray-800 mt-2'>Delivery of materials will come with extra cost: for further details call <a href="tel:+2349058936016" className='font-semibold'>(+234) 9058936016</a> or <a href="tel:+2348025893272" className='font-semibold'>(+234) 8025893272</a></div>
+            </div>
+
             <div className='max-xxs:text-base'>
               <label htmlFor="guests" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
                 <Users className="w-5 h-5 text-yellow-500" />
@@ -259,11 +317,17 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
               />
             </div>
 
+            {
+              appState.error?.length > 1
+              ? <p className="text-red-500 text-sm">The following input(s) are required <strong>{appState.error}</strong></p> 
+              : null
+            }
+
             <div className="text-center">
               <button
                 type="submit"
                 disabled={!canSubmit || isLoading}
-                className="inline-flex items-center space-x-3 disabled:bg-yellow-800 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                className={`inline-flex items-center space-x-3 disabled:bg-yellow-800 ${canSubmit ? 'bg-gradient-to-r from-yellow-400 to-yellow-500' : ''} text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg`}
               >
                 <Send className="w-6 h-6" />
                 <span>Send RSVP</span>
