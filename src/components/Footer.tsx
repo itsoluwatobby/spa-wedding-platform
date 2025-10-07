@@ -6,8 +6,8 @@ type FooterProps = {
 
 const Footer = ({ config }: FooterProps) => {
   return (
-    <footer className="bg-gray-800 text-white py-16 w-full">
-      <div className="max-w-7xl mx-auto px-4">
+    <footer className="relative flex flex-col justify-center bg-gray-800 text-white py-16 w-full">
+      <div className="self-center max-w-7xl mx-auto px-4">
         <div className="text-center">
           <div className="mb-8">
             <Heart className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
@@ -65,6 +65,11 @@ const Footer = ({ config }: FooterProps) => {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className='flex items-center gap-2 absolute right-4 bottom-3 text-xs font-mono text-gray-300'>
+        <p>Developed by oluwatobi</p>
+        <p>Contact: <a href="mailto:itsoluwatobby@gmail.com">itsoluwatobby@gmail.com</a></p>
       </div>
     </footer>
   );
