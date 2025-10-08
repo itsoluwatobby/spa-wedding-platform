@@ -29,6 +29,16 @@ export function sanitizeString(entry: string) {
   return val
 }
 
+export const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
+
 export function sanitizeEntries<T extends object>(entries: T): T {
   const sanitizedValues = Object.entries(entries).map(([key, value]) => {
     if (typeof value === 'string') return [key, sanitizeString(value)]

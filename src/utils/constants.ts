@@ -11,3 +11,11 @@ export const AccountDetails = {
     accountNumber: '6370284740'
   }
 };
+
+export const initState = {
+  data: {} as SuccessResponse<RSVPProps>['data'],
+  hasSubmitted: false,
+  isLoading: false,
+  reload: 0,
+  error: null,
+};
