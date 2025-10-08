@@ -8,7 +8,7 @@ const Footer = ({ config }: FooterProps) => {
   return (
     <footer className="relative flex flex-col justify-center bg-gray-800 text-white py-16 w-full">
       <div className="self-center max-w-7xl mx-auto px-4">
-        <div className="text-center">
+        <div className="text-center w-full">
           <div className="mb-8">
             <Heart className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
             <h3 className="text-3xl max-xxs:text-2xl font-serif mb-4">{config.name}</h3>
@@ -59,7 +59,7 @@ const Footer = ({ config }: FooterProps) => {
             </div>
           </div>
 
-          <div className="border-t border-gray-700 pt-8">
+          <div className="border-t border-gray-700 pt-8 w-full">
             <p className="text-gray-400 max-xxs:text-sm">
               © 2025 {config.name}'s Wedding. Made with love for our special day.
             </p>

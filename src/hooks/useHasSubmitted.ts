@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDeviceFingerprint } from "../utils/helpers";
-
-const initState = {
-  data: {} as SuccessResponse['data'],
-  hasSubmitted: false,
-  isLoading: false,
-  reload: 0,
-  error: null,
-};
+import { initState } from "../utils/constants";
 
 export const useHasSubmitted = () => {
   const [appState, setAppState] = useState(initState);
@@ -25,7 +18,7 @@ export const useHasSubmitted = () => {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         })
-        const data = await res.json() as SuccessResponse;
+        const data = await res.json() as SuccessResponse<RSVPProps>;
         if (data.data) {
           setAppState((prev) => (
             {

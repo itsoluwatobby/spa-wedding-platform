@@ -247,34 +247,46 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
             </div>
 
             <div className="flex flex-col">
-              <div className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+              <div className="flex items-center border-b pb-4 space-x-2 text-gray-700 font-medium mb-3">
                 <Shirt className="w-5 h-5 text-yellow-500" />
                 <span>Outfit Materials (Color code: Pink & White) *</span>
               </div>
               <div className="grid md:grid-cols-2 gap-6">
-                <input
-                  type="number"
-                  id="fila"
-                  name="fila"
-                  value={formData.fila}
-                  onChange={handleInputChange}
-                  // required
-                  min={1}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-                  placeholder="Men's cap (Fila)"
-                />
+                <div>
+                  <label htmlFor="fila" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                    <span className="w-5 h-5 text-yellow-500">👔</span>
+                    <span>Fila (Traditional Cap)</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="fila"
+                    name="fila"
+                    value={formData.fila}
+                    onChange={handleInputChange}
+                    // required
+                    min={1}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                    placeholder="Men's cap (Fila)"
+                  />
+                </div>
 
-                <input
-                  type="number"
-                  id="gele"
-                  name="gele"
-                  value={formData.gele}
-                  onChange={handleInputChange}
-                  // required
-                  min={1}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-                  placeholder="Women's headgear (Gele)"
-                />
+                <div>
+                  <label htmlFor="gele" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                    <span className="w-5 h-5 text-yellow-500">👗</span>
+                    <span>Gele (Head Wrap)</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="gele"
+                    name="gele"
+                    value={formData.gele}
+                    onChange={handleInputChange}
+                    // required
+                    min={1}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                    placeholder="Women's headgear (Gele)"
+                  />
+                </div>
               </div>
               <div className='text-sm text-gray-800 mt-2'>Delivery of materials will come with extra cost: for further details call <a href="tel:+2349058936016" className='font-semibold'>(+234) 9058936016</a> or <a href="tel:+2348025893272" className='font-semibold'>(+234) 8025893272</a></div>
             </div>

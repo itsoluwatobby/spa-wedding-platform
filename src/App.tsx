@@ -1,39 +1,11 @@
-import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import Story from './components/Story';
-import Gallery from './components/Gallery';
-import Invitation from './components/Invitation';
-import RSVP from './components/RSVP';
-import Contributions from './components/Contributions';
-import AccessCards from './components/AccessCards';
-import Footer from './components/Footer';
-import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import { useHasSubmitted } from './hooks/useHasSubmitted';
+import HomePage from './pages/Home';
+import AdminPage from './pages/AdminPage';
 
 function App() {
-  const { data, hasSubmitted, refetch } = useHasSubmitted();
-
-  const [config] = useState<AppConfig>(
-    {
-      date: "December 27, 2025",
-      name: "Oluwapelumi & Oluwaseun",
-      contacts: {
-        phone: {
-          first: ["Mr. Segun", "+2348024210466"],
-          second: ["Mr. Temitope", "+2348055571094"],
-        },
-        email: {}
-      },
-      location: {
-        address: "Crown Plaza Event Center, @ 157 Ijesha Rd, Itire, Lagos",
-        googleMapsLink: "https://maps.app.goo.gl/pgUJRnHL68xtNi2h6"
-      }
-    },
-  );
-
   const ogDetails = {
     title: "Oluwapelumi&Oluwaseun'25",
     description: "Our wedding is on December 27, 2025. Come, celebrate with us",
@@ -73,27 +45,13 @@ function App() {
         <meta property="og:twitter:site" data-n-head="ssr" data-hid="og:twitter:site" content={ogDetails.site} />
       </Helmet>
 
-      <Navigation name={config.name} />
 
-      <main className="w-full">
-        <div id="home">
-          <Hero config={config} />
-        </div>
-        <Story />
-        <Gallery />
-        <Invitation googleMapsLink={config.location.googleMapsLink}/>
-        <RSVP 
-          // data={data}
-          refetch={refetch}
-          hasSubmitted={hasSubmitted}
-        />
-        <Contributions />
-        <AccessCards 
-          data={data}
-          hasSubmitted={hasSubmitted}
-        />
-      </main>
-      <Footer config={config} />
+      <Router>
+      <Routes>
+        <Route path="/admin" element={<AdminPage />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </Router>
 
       <ToastContainer />
     </div>

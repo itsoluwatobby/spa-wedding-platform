@@ -30,16 +30,18 @@ type ResponseObj = {
 
 type ErrorResponse = ResponseObj & { error: null }
 
-type SuccessResponse = ResponseObj & {
-	data: {
-		Date: string;
-		Name: string,
-		Email: string,
-		Phone: number | string,
-		Attending: AttendanceProps,
-		Guests: number,
-		Message: string,
-		DeviceFingerprint: string,
-		CardId: number
-	}
+type RSVPProps = {
+  Date: string;
+  Name: string,
+  Email: string,
+  Phone: number | string,
+  Attending: AttendanceProps,
+  Guests: number,
+  Message: string,
+  DeviceFingerprint: string,
+  CardId: number
+  Fila: string;
+  Gele: string;
 }
+
+type SuccessResponse <T> = ResponseObj & { data: T }
