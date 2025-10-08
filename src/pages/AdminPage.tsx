@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Search, ArrowUpDown, ArrowUp, ArrowDown, Users, Calendar, Phone, Mail, MessageSquare, Eye, EyeOff } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, ArrowUpDown, ArrowUp, ArrowDown, Users, Calendar, Phone, Mail, MessageSquare, Eye, LoaderIcon } from 'lucide-react';
 import { useDebounce } from '../hooks/useDebounce';
 import { initState } from '../utils/constants';
+import TableHead from '../components/Admin/table/TableHead';
+import { formatDate } from '../utils/helpers';
+import { GetAttendingBadge, GetTraditionalWearBadge } from '../components/Admin/table/Components';
+import PreviewModal from '../components/Admin/table/PreviewModal';
+import { AdminPanel } from '../components/Admin/table/AdminPanel';
+import { Heading } from '../components/Admin/Heading';
 
 
 type SortField = 'cardId' | 'name' | 'guests';
@@ -15,16 +21,14 @@ const AdminPage = () => {
   const [sortField, setSortField] = useState<SortField>('cardId');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-
-  const ADMIN_PASSWORD = 'wedding2025'; // In production, this should be more secure
+  const [selectedRsvp, setSelectedRsvp] = useState<RSVPProps | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const [appState, setAppState] = useState(initState);
 
   const { isLoading, reload } = appState;
 
-  // const refetch = () => setAppState((prev) => ({ ...prev, reload: prev.reload + 1 }));
+  const refetch = () => setAppState((prev) => ({ ...prev, reload: prev.reload + 1 }));
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -53,15 +57,6 @@ const AdminPage = () => {
   useEffect(() => {
     filterAndSortRSVPs();
   }, [rsvps, debouncedSearchTerm, sortField, sortDirection]);
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-    } else {
-      alert('Incorrect password');
-    }
-  };
 
   const filterAndSortRSVPs = () => {
     let filtered = rsvps.filter(rsvp =>
@@ -119,121 +114,34 @@ const AdminPage = () => {
     return sortDirection === 'asc' ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />;
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  const openModal = (rsvp: RSVPProps) => {
+    setSelectedRsvp(rsvp);
+    setShowModal(true);
   };
 
-  const getAttendingBadge = (attending: string) => {
-    if (attending === 'yes') {
-      return <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Attending</span>;
-    } else {
-      return <span className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium">Not Attending</span>;
-    }
-  };
-
-  const getTraditionalWearBadge = (value: string, type: 'fila' | 'gele') => {
-    if (!value) return <span className="text-gray-400 text-xs">Not specified</span>;
-    
-    const colors = {
-      yes: 'bg-blue-100 text-blue-800',
-      no: 'bg-gray-100 text-gray-800',
-      maybe: 'bg-yellow-100 text-yellow-800'
-    };
-
-    const labels = {
-      yes: type === 'fila' ? 'Will wear fila' : 'Will wear gele',
-      no: type === 'fila' ? 'No fila' : 'No gele',
-      maybe: 'Maybe'
-    };
-
-    return (
-      <span className={`px-2 py-1 rounded-full text-xs font-medium ${colors[value as keyof typeof colors]}`}>
-        {labels[value as keyof typeof labels]}
-      </span>
-    );
+  const closeModal = () => {
+    setSelectedRsvp(null);
+    setShowModal(false);
   };
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Users className="w-8 h-8 text-yellow-600" />
-            </div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">Admin Access</h1>
-            <p className="text-gray-600">Enter password to view RSVP data</p>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition-colors duration-200 pr-12"
-                  placeholder="Enter admin password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-white py-3 rounded-xl font-semibold hover:from-yellow-500 hover:to-yellow-600 transition-all duration-200 transform hover:scale-105"
-            >
-              Access Admin Panel
-            </button>
-          </form>
-        </div>
-      </div>
-    );
+      <AdminPanel 
+        setIsAuthenticated={setIsAuthenticated}
+      />
+    )
   }
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">RSVP Management</h1>
-              <p className="text-gray-600">
-                Total RSVPs: <span className="font-semibold">{rsvps.length}</span> | 
-                Attending: <span className="font-semibold text-green-600">
-                  {rsvps.filter(r => r.Attending === "YES").length}
-                </span> | 
-                Not Attending: <span className="font-semibold text-red-600">
-                  {rsvps.filter(r => r.Attending === "NO").length}
-                </span>
-              </p>
-            </div>
-            <button
-              onClick={() => setIsAuthenticated(false)}
-              className="mt-4 md:mt-0 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
+        <Heading 
+          isLoading={isLoading}
+          rsvps={rsvps}
+          refresh={refetch}
+          setIsAuthenticated={setIsAuthenticated} 
+        />
 
         {/* Search and Controls */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
@@ -292,22 +200,12 @@ const AdminPage = () => {
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Card ID</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guests</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fila</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gele</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
-                </tr>
-              </thead>
+              
+              <TableHead />
+
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredRsvps.map((rsvp) => (
-                  <tr key={rsvp.CardId} className="hover:bg-gray-50 transition-colors duration-150">
+                {!isLoading && filteredRsvps?.map((rsvp) => (
+                  <tr key={rsvp.CardId} className="hover:bg-gray-50 transition-colors duration-150 cursor-default">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="text-sm font-mono text-gray-900">#{rsvp.CardId}</span>
                     </td>
@@ -333,7 +231,7 @@ const AdminPage = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {getAttendingBadge(rsvp.Attending)}
+                      <GetAttendingBadge attending={rsvp.Attending} />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
@@ -342,10 +240,10 @@ const AdminPage = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {getTraditionalWearBadge(rsvp.Fila, 'fila')}
+                      <GetTraditionalWearBadge value={rsvp.Fila} />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {getTraditionalWearBadge(rsvp.Gele, 'gele')}
+                      <GetTraditionalWearBadge value={rsvp.Gele} />
                     </td>
                     <td className="px-6 py-4">
                       <div className="max-w-xs">
@@ -359,13 +257,29 @@ const AdminPage = () => {
                         )}
                       </div>
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <button
+                        onClick={() => openModal(rsvp)}
+                        className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors duration-200"
+                      >
+                        <Eye className="w-4 h-4 mr-1" />
+                        View
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          {filteredRsvps.length === 0 && (
+          {
+            isLoading ?
+            <div className='text-center py-12'>
+              <div className='w-12 h-12 text-gray-500 mx-auto mb-4'>
+                <LoaderIcon size={32} className='animate-spin duration-500' />
+              </div>
+            </div>
+            : filteredRsvps.length === 0 ? (
             <div className="text-center py-12">
               <Users className="w-12 h-12 text-gray-300 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">No RSVPs found</h3>
@@ -373,9 +287,14 @@ const AdminPage = () => {
                 {searchTerm ? 'Try adjusting your search terms.' : 'No RSVPs have been submitted yet.'}
               </p>
             </div>
-          )}
+          ) : null}
         </div>
       </div>
+      {
+        showModal && selectedRsvp 
+          ? <PreviewModal selectedRsvp={selectedRsvp} closeModal={closeModal} /> 
+          : null
+      }
     </div>
   );
 };
