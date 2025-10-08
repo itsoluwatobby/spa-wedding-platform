@@ -261,7 +261,7 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
                   // required
                   min={1}
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-                  placeholder="Enter Number of Fila"
+                  placeholder="Men's cap (Fila)"
                 />
 
                 <input
@@ -273,7 +273,7 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
                   // required
                   min={1}
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-                  placeholder="Enter Number of Gele"
+                  placeholder="Women's headgear (Gele)"
                 />
               </div>
               <div className='text-sm text-gray-800 mt-2'>Delivery of materials will come with extra cost: for further details call <a href="tel:+2349058936016" className='font-semibold'>(+234) 9058936016</a> or <a href="tel:+2348025893272" className='font-semibold'>(+234) 8025893272</a></div>
