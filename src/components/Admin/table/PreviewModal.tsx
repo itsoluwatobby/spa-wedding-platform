@@ -72,6 +72,13 @@ const PreviewModal: React.FC<PreviewModalProps> = ({ selectedRsvp, closeModal })
                   <span className="text-gray-900 font-medium">{selectedRsvp.Guests}</span>
                 </div>
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Assigned Seats</label>
+                <div className="text-gray-900 font-mono bg-gray-50 px-3 py-2 rounded border">
+                  {selectedRsvp.Seats || 'Not assigned'}
+                </div>
+              </div>
             </div>
           </div>
 
