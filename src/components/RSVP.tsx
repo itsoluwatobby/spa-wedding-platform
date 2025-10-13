@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { Send, Heart, User, Phone, Users, MessageSquare, LoaderIcon, MailIcon, Shirt } from 'lucide-react';
 import { getDeviceFingerprint, sanitizeEntries } from '../utils/helpers';
 import { toast } from 'react-toastify';
@@ -51,6 +51,11 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
     return Object.keys(reqObj)?.length < 1;
   };
 
+  useEffect(() => {
+    if (+fila > 30) setFormData(prev => ({ ...prev, fila: '5' }));
+    if (+gele > 30) setFormData(prev => ({ ...prev, gele: '5' }));
+  }, [fila, gele])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateInput()) return;
@@ -75,37 +80,49 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
       };
 
       newEntry = sanitizeEntries(newEntry);
-      await fetch(`${import.meta.env.VITE_BASE_URL}/submit`, {
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(newEntry),
-      })
+      });
 
-      refetch();
-
-      const anchor = document.createElement('a');
-      anchor.href = '/images/invitation_card.png';
-      anchor.download = "invitation_card.png";
-      document.body.appendChild(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
-
-      toast.success('Response recorded, Please print your Invitation Card');
-      setFormData(initFormData);
-      setIsSubmitted(true);
-
-      setTimeout(() => {
-        const link = document.createElement('a');
-        link.href = '#access-cards';
-        link.click();
-      }, 3000);
+      if (res.ok) {
+        refetch();
+  
+        const anchor = document.createElement('a');
+        anchor.href = '/images/invitation_card.png';
+        anchor.download = "invitation_card.png";
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
+  
+        toast.success('Response recorded, Please print your Invitation Card');
+        setFormData(initFormData);
+        setIsSubmitted(true);
+        
+        setTimeout(() => {
+          const link = document.createElement('a');
+          link.href = '#access-cards';
+          link.click();
+        }, 3000);
+      } else {
+        const errorData: ErrorResponse = await res.json();
+        throw new Error(errorData?.error?.message || 'Fail to submit');
+      }
     }
     catch (error: any) {
-      console.log(error.message)
       setAppState(prev => ({ ...prev, error: '' }));
-      toast.error('Fail to submit')
+      const messages = error.message?.split("__")
+      if (messages[0] === "Duplicate submission") {
+        localStorage.setItem('deviceId', messages[1]);
+        setIsSubmitted(true);
+        refetch();
+        toast.success("You have already submitted your response. If you need to make changes, please contact us");
+      } else {
+        toast.error(error?.message || 'Fail to submit response, please try again later');
+      }
     }
     finally {
       setAppState(prev => ({ ...prev, isLoading: false }));
@@ -265,6 +282,8 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
                     onChange={handleInputChange}
                     // required
                     min={1}
+                    max={30}
+                    autoComplete='off'
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
                     placeholder="Men's cap (Fila)"
                   />
@@ -283,6 +302,8 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
                     onChange={handleInputChange}
                     // required
                     min={1}
+                    max={30}
+                    autoComplete='off'
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
                     placeholder="Women's headgear (Gele)"
                   />
