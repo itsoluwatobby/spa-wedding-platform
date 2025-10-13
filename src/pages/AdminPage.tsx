@@ -240,6 +240,11 @@ const AdminPage = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-mono text-gray-900 bg-gray-50 px-2 py-1 rounded">
+                        {rsvp.Seats || 'Not assigned'}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
                       <GetTraditionalWearBadge value={rsvp.Fila} />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
