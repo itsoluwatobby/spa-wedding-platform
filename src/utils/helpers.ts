@@ -49,7 +49,7 @@ export function sanitizeEntries<T extends object>(entries: T): T {
 
 export function getDeviceFingerprint() {
   let deviceId = localStorage.getItem('deviceId');
-  if (!deviceId) {
+  if (!deviceId || deviceId === "undefined") {
       const navigator = window.navigator;
       const screen = window.screen;
       const fingerprint = [

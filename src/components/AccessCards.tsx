@@ -2,12 +2,12 @@ import { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import { CreditCard, Download } from 'lucide-react';
 
-type AccessCardProps = {
+type AccessCardProps<T> = {
   hasSubmitted: boolean;
-  data: SuccessResponse['data'];
+  data: SuccessResponse<T>['data'];
 }
 
-const AccessCards = ({ data, hasSubmitted }: AccessCardProps) => {
+const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
   const componentRef = useRef<HTMLDivElement>(null);
 
   const convertToImage = async () => {
@@ -39,7 +39,7 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps) => {
             <figure className='relative w-full h-full max-md:w-[32rem]'>
               <img
                 src="/images/access_card_front.png"
-                alt="Wedding Background"
+                alt="Acces Card Front"
                 className="w-full h-full object-cover"
               />
               {
@@ -62,11 +62,21 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps) => {
               }
             </figure>
             
-            <img
-              src="/images/access_card_back.png"
-              alt="Wedding Background"
-              className="w-full h-full object-cover max-md:w-[32rem]"
-            />
+            <figure className='relative w-full h-full max-md:w-[32rem]'>
+              <img
+                src="/images/access_card_back.png"
+                alt="Access Card Back"
+                className="w-full h-full object-cover"
+              />
+
+              {
+                data?.Seats ?
+                <p className='absolute right-5 text-end top-1 p-0.5 px-2.5 pb-2 line-clamp-1 font-semibold text-base w-[60%] text-white'>
+                Seat No: <span className='font-bold text-lg italic tracking-tighter'>{data.Seats}</span>
+                </p>
+                : null
+              }
+            </figure>
           </div>
   
           <div className="mt-6 text-center ">

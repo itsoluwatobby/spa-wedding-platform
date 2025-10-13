@@ -28,7 +28,13 @@ type ResponseObj = {
   message: string;
 }
 
-type ErrorResponse = ResponseObj & { error: null }
+type ErrorResponse = ResponseObj & {
+  error: {
+    message: string;
+    statusCode: number;
+    success: boolean;
+  }
+}
 
 type RSVPProps = {
   Date: string;
@@ -42,6 +48,7 @@ type RSVPProps = {
   CardId: number
   Fila: string;
   Gele: string;
+  Seats: string;
 }
 
 type SuccessResponse <T> = ResponseObj & { data: T }
