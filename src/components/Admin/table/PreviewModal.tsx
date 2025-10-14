@@ -16,7 +16,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({ selectedRsvp, closeModal })
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div>
             <h2 className="text-2xl font-bold text-gray-800">RSVP Details</h2>
-            <p className="text-sm text-gray-500">Card ID: #{selectedRsvp.CardId}</p>
+            <p className="text-sm text-gray-500">Card ID: #{selectedRsvp.cardId}</p>
           </div>
           <button
             onClick={closeModal}
@@ -37,19 +37,19 @@ const PreviewModal: React.FC<PreviewModalProps> = ({ selectedRsvp, closeModal })
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                <p className="text-gray-900 font-medium">{selectedRsvp.Name}</p>
+                <p className="text-gray-900 font-medium">{selectedRsvp.name}</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                <p className="text-gray-900">{selectedRsvp.Email}</p>
+                <p className="text-gray-900">{selectedRsvp.email}</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                <p className="text-gray-900">{selectedRsvp.Phone}</p>
+                <p className="text-gray-900">{selectedRsvp.phone}</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Submission Date</label>
-                <p className="text-gray-900">{formatDate(selectedRsvp.Date)}</p>
+                <p className="text-gray-900">{formatDate(selectedRsvp.date)}</p>
               </div>
             </div>
           </div>
@@ -63,20 +63,20 @@ const PreviewModal: React.FC<PreviewModalProps> = ({ selectedRsvp, closeModal })
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Attendance Status</label>
-                <GetAttendingBadge attending={selectedRsvp.Attending} />
+                <GetAttendingBadge attending={selectedRsvp.attending} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Number of Guests</label>
                 <div className="flex items-center">
                   <Users className="w-4 h-4 text-gray-400 mr-2" />
-                  <span className="text-gray-900 font-medium">{selectedRsvp.Guests}</span>
+                  <span className="text-gray-900 font-medium">{selectedRsvp.guests}</span>
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Assigned Seats</label>
                 <div className="text-gray-900 font-mono bg-gray-50 px-3 py-2 rounded border">
-                  {selectedRsvp.Seats || 'Not assigned'}
+                  {selectedRsvp.seats.join(",") || 'Not assigned'}
                 </div>
               </div>
             </div>
@@ -91,27 +91,29 @@ const PreviewModal: React.FC<PreviewModalProps> = ({ selectedRsvp, closeModal })
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Fila (Traditional Cap)</label>
-                <GetTraditionalWearBadge value={selectedRsvp.Fila} />
+                <GetTraditionalWearBadge value={selectedRsvp.fila} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Gele (Head Wrap)</label>
-                <GetTraditionalWearBadge value={selectedRsvp.Fila} />
+                <GetTraditionalWearBadge value={selectedRsvp.fila} />
               </div>
             </div>
           </div>
 
           {/* Message */}
-          {selectedRsvp.Message && (
-            <div className="bg-gray-50 rounded-xl p-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                <MessageSquare className="w-5 h-5 mr-2 text-yellow-500" />
-                Special Message
-              </h3>
-              <div className="bg-white rounded-lg p-4 border border-gray-200">
-                <p className="text-gray-700 leading-relaxed">{selectedRsvp.Message}</p>
+          {
+            selectedRsvp.message ? (
+              <div className="bg-gray-50 rounded-xl p-4">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                  <MessageSquare className="w-5 h-5 mr-2 text-yellow-500" />
+                  Special Message
+                </h3>
+                <div className="bg-white rounded-lg p-4 border border-gray-200">
+                  <p className="text-gray-700 leading-relaxed">{selectedRsvp.message}</p>
+                </div>
               </div>
-            </div>
-          )}
+            ) : null
+          }
 
           {/* Technical Information */}
           <div className="bg-gray-50 rounded-xl p-4">
@@ -122,7 +124,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({ selectedRsvp, closeModal })
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Device Fingerprint</label>
               <p className="text-gray-900 font-mono text-sm bg-white px-3 py-2 rounded border">
-                {selectedRsvp.DeviceFingerprint}
+                {selectedRsvp.deviceFingerprint}
               </p>
             </div>
           </div>

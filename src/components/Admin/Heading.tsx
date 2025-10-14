@@ -1,4 +1,5 @@
 import { RefreshCw } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 type HeadingProps = {
   isLoading: boolean;
@@ -9,6 +10,7 @@ type HeadingProps = {
 export const Heading: React.FC<HeadingProps> = (
   { isLoading, rsvps, refresh, setIsAuthenticated }
 ) => {
+  const navigate = useNavigate();
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
@@ -18,10 +20,10 @@ export const Heading: React.FC<HeadingProps> = (
           <p className="text-gray-600">
             Total RSVPs: <span className="font-semibold">{rsvps.length}</span> | 
             Attending: <span className="font-semibold text-green-600">
-              {rsvps.filter(r => r.Attending === "YES").length}
+              {rsvps.filter(r => r.attending === "YES").length}
             </span> | 
             Not Attending: <span className="font-semibold text-red-600">
-              {rsvps.filter(r => r.Attending === "NO").length}
+              {rsvps.filter(r => r.attending === "NO").length}
             </span>
           </p>
         </div>
@@ -34,7 +36,10 @@ export const Heading: React.FC<HeadingProps> = (
             <span>Reload</span>
           </button>
           <button
-            onClick={() => setIsAuthenticated(false)}
+            onClick={() => {
+              setIsAuthenticated(false);
+              navigate("/");
+            }}
             className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
           >
             Logout

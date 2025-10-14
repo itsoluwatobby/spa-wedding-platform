@@ -9,6 +9,7 @@ type AccessCardProps<T> = {
 
 const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
   const componentRef = useRef<HTMLDivElement>(null);
+  console.log(data)
 
   const convertToImage = async () => {
     if (!componentRef.current) return;
@@ -17,7 +18,7 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
     // Use the image (e.g., download or display)
     const link = document.createElement('a');
     link.href = image;
-    link.download = `${data.Name}-access card.png`;
+    link.download = `${data.name}-access card.png`;
     link.click();
   };
 
@@ -43,19 +44,19 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
                 className="w-full h-full object-cover"
               />
               {
-                data?.Name ?
+                data?.name ?
                 <p className='absolute right-5 text-end bottom-[4.7rem] p-0.5 px-2.5 pb-2 line-clamp-1 font-semibold text-xl w-[60%] text-white'>
-                {data.Name}<span className='font-bold text-4xl italic tracking-tighter'>+{data.Guests}</span>
+                {data.name}<span className='font-bold text-4xl italic tracking-tighter'>+{data.guests}</span>
                 </p>
                 : null
               }
 
               {
-                data?.CardId ?
+                data?.cardId ?
                 <div className='absolute left-[40%] bottom-[10rem] pb-5 px-2.5 line-clamp-1 p-1 pt-0 rounded-t-lg rounded-b-xl text-gray-100'>
                   <p className='w-full text-end text-5xl font-mono'>
                     {/* ID. <span className='font-semibold'>{data.CardId}</span> */}
-                    {data.CardId}
+                    {data.cardId}
                   </p>
                 </div>
                 : null
@@ -70,9 +71,9 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
               />
 
               {
-                data?.Seats ?
+                data?.seats?.length ?
                 <p className='absolute right-5 text-end top-1 p-0.5 px-2.5 pb-2 line-clamp-1 font-semibold text-base w-[60%] text-white'>
-                Seat No: <span className='font-bold text-lg italic tracking-tighter'>{data.Seats}</span>
+                Seat No: <span className='font-bold text-lg italic tracking-tighter'>{data.seats.join(",")}</span>
                 </p>
                 : null
               }
