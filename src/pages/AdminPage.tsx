@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Search, ArrowUpDown, ArrowUp, ArrowDown, Users, Calendar, Phone, Mail, MessageSquare, Eye, LoaderIcon } from 'lucide-react';
+import { Search, ArrowUpDown, ArrowUp, ArrowDown, Users, LoaderIcon } from 'lucide-react';
 import { useDebounce } from '../hooks/useDebounce';
 import { initState } from '../utils/constants';
 import TableHead from '../components/Admin/table/TableHead';
-import { formatDate } from '../utils/helpers';
-import { GetAttendingBadge, GetTraditionalWearBadge } from '../components/Admin/table/Components';
 import PreviewModal from '../components/Admin/table/PreviewModal';
 import { AdminPanel } from '../components/Admin/table/AdminPanel';
 import { Heading } from '../components/Admin/Heading';
+import TableBody from '../components/Admin/table/Tablebody';
+import { toast } from 'react-toastify';
 
 
 type SortField = 'cardId' | 'name' | 'guests';
@@ -25,6 +25,7 @@ const AdminPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   const [appState, setAppState] = useState(initState);
+   const [appStateDelete, setAppStateDelete] = useState(initState);
 
   const { isLoading, reload } = appState;
 
@@ -39,10 +40,9 @@ const AdminPage = () => {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
           })
-          const data = await res.json() as SuccessResponse<RSVPProps[]>;
+          const data = await res.json() as SuccessResponse<{ docs: RSVPProps[] }>;
           if (data.data) {
-            console.log(data.data)
-            setRsvps(data.data);
+            setRsvps(data.data.docs);
           }
         } catch(err: any) {
           console.log(err.Message);
@@ -60,10 +60,10 @@ const AdminPage = () => {
 
   const filterAndSortRSVPs = () => {
     let filtered = rsvps.filter(rsvp =>
-      rsvp.Name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-      rsvp.Email.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-      rsvp.Phone.toString().includes(debouncedSearchTerm) ||
-      rsvp.CardId.toString().includes(debouncedSearchTerm)
+      rsvp.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+      rsvp.email.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+      rsvp.phone.toString().includes(debouncedSearchTerm) ||
+      rsvp.cardId.toString().includes(debouncedSearchTerm)
     );
 
     filtered.sort((a, b) => {
@@ -72,20 +72,20 @@ const AdminPage = () => {
 
       switch (sortField) {
         case 'cardId':
-          aValue = a.CardId;
-          bValue = b.CardId;
+          aValue = a.cardId;
+          bValue = b.cardId;
           break;
         case 'name':
-          aValue = a.Name.toLowerCase();
-          bValue = b.Name.toLowerCase();
+          aValue = a.name.toLowerCase();
+          bValue = b.name.toLowerCase();
           break;
         case 'guests':
-          aValue = +a.Guests;
-          bValue = +b.Guests;
+          aValue = +a.guests;
+          bValue = +b.guests;
           break;
         default:
-          aValue = a.CardId;
-          bValue = b.CardId;
+          aValue = a.cardId;
+          bValue = b.cardId;
       }
 
       if (sortDirection === 'asc') {
@@ -131,6 +131,28 @@ const AdminPage = () => {
       />
     )
   }
+  
+  const { isLoading: isDeleteLoading } = appStateDelete;
+
+  const handleDelete = async (id: string) => {
+    if (isDeleteLoading || !id) return;
+
+    setAppStateDelete((prev) => ({ ...prev, isLoading: true }));
+    try {
+      await fetch(`${import.meta.env.VITE_BASE_URL}/delete/${id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      })
+      const others = filteredRsvps.filter((rsvp) => rsvp._id !== id);
+      setFilteredRsvps(others);
+
+    } catch(err: any) {
+      setAppStateDelete((prev) => ({ ...prev, error: err.Message }));
+      toast.error(err.message);
+    } finally {
+      setAppStateDelete((prev) => ({ ...prev, isLoading: false }));
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -205,73 +227,13 @@ const AdminPage = () => {
 
               <tbody className="bg-white divide-y divide-gray-200">
                 {!isLoading && filteredRsvps?.map((rsvp) => (
-                  <tr key={rsvp.CardId} className="hover:bg-gray-50 transition-colors duration-150 cursor-default">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm font-mono text-gray-900">#{rsvp.CardId}</span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 text-gray-400 mr-2" />
-                        <span className="text-sm text-gray-900">{formatDate(rsvp.Date)}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">{rsvp.Name}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="space-y-1">
-                        <div className="flex items-center text-sm text-gray-600">
-                          <Mail className="w-3 h-3 mr-1" />
-                          {rsvp.Email}
-                        </div>
-                        <div className="flex items-center text-sm text-gray-600">
-                          <Phone className="w-3 h-3 mr-1" />
-                          {rsvp.Phone}
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <GetAttendingBadge attending={rsvp.Attending} />
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <Users className="w-4 h-4 text-gray-400 mr-2" />
-                        <span className="text-sm font-medium text-gray-900">{rsvp.Guests}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-mono text-gray-900 bg-gray-50 px-2 py-1 rounded">
-                        {rsvp.Seats || 'Not assigned'}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <GetTraditionalWearBadge value={rsvp.Fila} />
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <GetTraditionalWearBadge value={rsvp.Gele} />
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="max-w-xs">
-                        {rsvp.Message ? (
-                          <div className="flex items-start">
-                            <MessageSquare className="w-4 h-4 text-gray-400 mr-2 mt-0.5 flex-shrink-0" />
-                            <span className="text-sm text-gray-600 line-clamp-3">{rsvp.Message}</span>
-                          </div>
-                        ) : (
-                          <span className="text-sm text-gray-400 italic">No message</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <button
-                        onClick={() => openModal(rsvp)}
-                        className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors duration-200"
-                      >
-                        <Eye className="w-4 h-4 mr-1" />
-                        View
-                      </button>
-                    </td>
-                  </tr>
+                  <TableBody 
+                    key={rsvp.cardId}
+                    rsvp={rsvp}
+                    openModal={openModal}
+                    handleDelete={handleDelete}
+                    isDeleteLoading={isDeleteLoading}
+                  />
                 ))}
               </tbody>
             </table>

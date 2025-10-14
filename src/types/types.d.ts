@@ -37,18 +37,19 @@ type ErrorResponse = ResponseObj & {
 }
 
 type RSVPProps = {
-  Date: string;
-  Name: string,
-  Email: string,
-  Phone: number | string,
-  Attending: AttendanceProps,
-  Guests: number,
-  Message: string,
-  DeviceFingerprint: string,
-  CardId: number
-  Fila: string;
-  Gele: string;
-  Seats: string;
+  _id: string;
+  date: string;
+  name: string,
+  email: string,
+  phone: number | string,
+  attending: AttendanceProps,
+  guests: number,
+  message: string,
+  deviceFingerprint: string,
+  cardId: number
+  fila: string;
+  gele: string;
+  seats: number[];
 }
 
 type SuccessResponse <T> = ResponseObj & { data: T }
