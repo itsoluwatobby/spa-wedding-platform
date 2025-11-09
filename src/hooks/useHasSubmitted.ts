@@ -14,22 +14,26 @@ export const useHasSubmitted = () => {
       setAppState((prev) => ({ ...prev, isLoading: true }));
       try {
         const fingerprint = getDeviceFingerprint();
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/submission/${fingerprint}`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        })
-        const data = await res.json() as SuccessResponse<RSVPProps>;
-        if (data.data) {
-          setAppState((prev) => (
-            {
-              ...prev,
-              data: data.data,
-              hasSubmitted: true,
-            }
-          ));
+        
+        const FlaggedDeviceIds = import.meta.env.VITE_ADMIN_DEVICE_IDS?.split(",");
+        if (!FlaggedDeviceIds.includes(fingerprint)) {
+          const res = await fetch(`${import.meta.env.VITE_BASE_URL}/submission/${fingerprint}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+          })
+          const data = await res.json() as SuccessResponse<RSVPProps>;
+          if (data.data) {
+            setAppState((prev) => (
+              {
+                ...prev,
+                data: data.data,
+                hasSubmitted: true,
+              }
+            ));
+          }
         }
       } catch(err: any) {
-        console.log(err.message);
+        // console.log(err.message);
         setAppState((prev) => ({ ...prev, error: err.message }));
       } finally {
         setAppState((prev) => ({ ...prev, isLoading: false }));
