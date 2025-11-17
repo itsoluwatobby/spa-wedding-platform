@@ -28,6 +28,11 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
   const [formData, setFormData] = useState(initFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const [flaggedFingerprints, setFlaggedFingerprints] = useState<string[]>([]);
+  const [deviceFingerprint, setDeviceFingerprint] = useState<string | null>(null);
+  const [regularCount, setRegularCount] = useState(1);
+  const [adminCount, setAdminCount] = useState(8);
+
   const { isLoading } = appState;
 
   const { message, email, phone, fila, gele, ...others } = formData;
@@ -50,6 +55,19 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
     setAppState(prev => ({ ...prev, error: errMsg }));
     return Object.keys(reqObj)?.length < 1;
   };
+
+  useEffect(() => {
+    setDeviceFingerprint(getDeviceFingerprint());
+
+    const regCount = import.meta.env.VITE_REGULAR_COUNT;
+    if (regCount) setRegularCount(+regCount);
+
+    const adCount = import.meta.env.VITE_ADMIN_COUNT;
+    if (adCount) setAdminCount(+adCount);
+  
+    const FlaggedPrints = import.meta.env.VITE_ADMIN_DEVICE_IDS?.split(",");
+    if (FlaggedPrints?.length) setFlaggedFingerprints(FlaggedPrints);
+  }, []);
 
   useEffect(() => {
     if (+fila > 30) setFormData(prev => ({ ...prev, fila: '5' }));
@@ -76,7 +94,7 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
         fila: formData.fila,
         gele: formData.gele,
         message: formData.message,
-        deviceFingerprint: getDeviceFingerprint(),
+        deviceFingerprint,
       };
 
       newEntry = sanitizeEntries(newEntry);
@@ -325,12 +343,20 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
                 required
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
               >
-                <option value="1">1 Guest</option>
-                <option value="2">2 Guests</option>
-                <option value="3">3 Guests</option>
-                <option value="4">4 Guests</option>
-                {/* <option value="5">5 Guests</option>
-                <option value="6">6+ Guests</option> */}
+                {
+                  flaggedFingerprints?.includes(deviceFingerprint!) ?
+                  [...Array(adminCount).keys()].map((_, i) => (
+                    <option 
+                    key={i}
+                    value={i+1}>{i+1} {(i+1) === 1 ? 'Guest' : 'Guests'}</option>
+                  ))
+                  :
+                  [...Array(regularCount).keys()].map((_, i) => (
+                    <option 
+                    key={i}
+                    value={i+1}>{i+1} {(i+1) === 1 ? 'Guest' : 'Guests'}</option>
+                  ))
+                }
               </select>
             </div>
 
