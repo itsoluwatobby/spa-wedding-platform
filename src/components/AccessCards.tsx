@@ -5,11 +5,12 @@ import { CreditCard, Download } from 'lucide-react';
 type AccessCardProps<T> = {
   hasSubmitted: boolean;
   data: SuccessResponse<T>['data'];
+  show?: boolean;
 }
 
-const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
+const AccessCards = ({ data, hasSubmitted, show = true }: AccessCardProps<RSVPProps>) => {
   const componentRef = useRef<HTMLDivElement>(null);
-  console.log(data)
+  // console.log(data)
 
   const convertToImage = async () => {
     if (!componentRef.current) return;
@@ -25,7 +26,7 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
   return (
     <section className="transition-all py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-10">
+        <div hidden={!show} className="text-center mb-10">
           <CreditCard className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
           <h2 className="text-3xl md:text-4xl font-serif text-gray-800 mb-4">Access Cards</h2>
           <p className="text-lg max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -35,6 +36,7 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
 
         <div id="access-cards" className='flex flex-col gap-4 w-full items-center'>
           <div 
+          id="event-access-card"
           ref={componentRef}
           className="grid md:grid-cols-2 gap-8 max-w4xl wfull place-items-center p-5">
             <figure className='relative w-full h-full max-md:w-[32rem]'>
@@ -72,15 +74,15 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
 
               {
                 data?.seats?.length ?
-                <p className='absolute right-5 text-end top-1 p-0.5 px-2.5 pb-2 line-clamp-1 font-semibold text-base w-[60%] text-white'>
-                Seat No: <span className='font-bold text-lg italic tracking-tighter'>{data.seats.join(",")}</span>
+                <p className='absolute right-5 text-end top-1 p-0.5 px-2.5 pb-2 line-clamp-1 font-semibold text-base w[60%] text-white'>
+                Seat No: <span className='font-bold text-lg italic tracking-tighter'>{data.seats.join(", ")}</span>
                 </p>
                 : null
               }
             </figure>
           </div>
   
-          <div className="mt-6 text-center ">
+          <div hidden={!show} className="mt-6 text-center ">
             <h4 className="text-xl font-bold text-gray-800 mb-2">Access Card</h4>
             <p className="text-gray-600 mb-4">The access card must be presented to gain entry.</p>
             {
@@ -98,7 +100,7 @@ const AccessCards = ({ data, hasSubmitted }: AccessCardProps<RSVPProps>) => {
         </div>
 
         {/* Instructions */}
-        <div className="mt-16 text-center bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+        <div hidden={!show} className="mt-16 text-center bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
           <h3 className="text-2xl font-bold text-gray-800 mb-4">How to Use Your Access Card</h3>
           <div className="grid md:grid-cols-3 gap-6 text-left">
             <div className="flex items-start space-x-3">
