@@ -134,12 +134,13 @@ const TableBody: React.FC<TableBodyProps> = ({ rsvp, openModal, handleDelete, is
 
     {/* Hidden Access Card for downloading - rendered off-screen */}
       <div
+        className="max-w-6xl"
         ref={hiddenCardRef}
         style={{
           position: "absolute",
           left: "-9999px",
           top: "-9999px",
-          width: "400px", // Set desired card width
+          // width: "400px", // Set desired card width
           padding: "20px",
           background: "lightgray",
         }}
