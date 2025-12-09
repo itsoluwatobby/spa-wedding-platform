@@ -184,219 +184,226 @@ const RSVP = ({ hasSubmitted, refetch }: RSVPProps) => {
   }
 
   return (
-    <section id="rsvp" className="py-20 bg-gradient-to-br from-yellow-50 to-white">
-      <div className="max-w-3xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-serif text-gray-800 mb-6">RSVP</h2>
-          <p className="text-xl max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Please let us know if you'll be joining us for our special day. 
-            Your response is greatly appreciated!
-          </p>
-        </div>
-
-        <div className="bg-white rounded-3xl shadow-2xl p-8 max-xxs:p-5 md:p-12 border-2 border-yellow-300">
-          <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Attendance Radio Buttons */}
-            <div className="text-center">
-              <h3 className="text-2xl max-xxs:text-xl font-serif text-gray-800 mb-6">Will you be attending?</h3>
-              <div className="flex justify-center space-x-8">
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="attending"
-                    value="YES"
-                    checked={formData.attending === 'YES'}
-                    onChange={handleInputChange}
-                    className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
-                    required
-                  />
-                  <span className="text-lg max-xxs:text-sm font-medium text-gray-700">Yes, I'll be there!</span>
-                </label>
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="attending"
-                    value="NO"
-                    checked={formData.attending === 'NO'}
-                    onChange={handleInputChange}
-                    className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
-                    required
-                  />
-                  <span className="text-lg max-xxs:text-sm font-medium text-gray-700">Sorry, can't make it</span>
-                </label>
-              </div>
+    <>
+    {
+      flaggedFingerprints?.includes(deviceFingerprint!) 
+      ? (
+        <section id="rsvp" className="py-20 bg-gradient-to-br from-yellow-50 to-white">
+          <div className="max-w-3xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-serif text-gray-800 mb-6">RSVP</h2>
+              <p className="text-xl max-xxs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Please let us know if you'll be joining us for our special day. 
+                Your response is greatly appreciated!
+              </p>
             </div>
 
-            {/* Form Fields */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="name" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
-                  <User className="w-5 h-5 text-yellow-500" />
-                  <span>Full Name *</span>
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-                  placeholder="Enter your full name"
-                />
-              </div>
+            <div className="bg-white rounded-3xl shadow-2xl p-8 max-xxs:p-5 md:p-12 border-2 border-yellow-300">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                {/* Attendance Radio Buttons */}
+                <div className="text-center">
+                  <h3 className="text-2xl max-xxs:text-xl font-serif text-gray-800 mb-6">Will you be attending?</h3>
+                  <div className="flex justify-center space-x-8">
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="attending"
+                        value="YES"
+                        checked={formData.attending === 'YES'}
+                        onChange={handleInputChange}
+                        className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
+                        required
+                      />
+                      <span className="text-lg max-xxs:text-sm font-medium text-gray-700">Yes, I'll be there!</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="attending"
+                        value="NO"
+                        checked={formData.attending === 'NO'}
+                        onChange={handleInputChange}
+                        className="w-5 h-5 text-yellow-500 focus:ring-yellow-400"
+                        required
+                      />
+                      <span className="text-lg max-xxs:text-sm font-medium text-gray-700">Sorry, can't make it</span>
+                    </label>
+                  </div>
+                </div>
 
-              <div>
-                <label htmlFor="phone" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
-                  <Phone className="w-5 h-5 text-yellow-500" />
-                  <span>Phone Number *</span>
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  // required
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-                  placeholder="(555) 123-4567"
-                />
-              </div>
-            </div>
+                {/* Form Fields */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                      <User className="w-5 h-5 text-yellow-500" />
+                      <span>Full Name *</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
 
-            <div>
-              <label htmlFor="email" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
-                <MailIcon className="w-5 h-5 text-yellow-500" />
-                <span>Email *</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                // required
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-                placeholder="johndoe@gmail.com"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <div className="flex items-center border-b pb-4 space-x-2 text-gray-700 font-medium mb-3">
-                <Shirt className="w-5 h-5 text-yellow-500" />
-                <span>Outfit Materials (Color code: Pink & White) *</span>
-              </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="fila" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
-                    <span className="w-5 h-5 text-yellow-500">👔</span>
-                    <span>Fila (Traditional Cap)</span>
-                  </label>
-                  <input
-                    type="number"
-                    id="fila"
-                    name="fila"
-                    value={formData.fila}
-                    onChange={handleInputChange}
-                    // required
-                    min={1}
-                    max={30}
-                    autoComplete='off'
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-                    placeholder="Men's cap (Fila)"
-                  />
+                  <div>
+                    <label htmlFor="phone" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                      <Phone className="w-5 h-5 text-yellow-500" />
+                      <span>Phone Number *</span>
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      // required
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                      placeholder="(555) 123-4567"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label htmlFor="gele" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
-                    <span className="w-5 h-5 text-yellow-500">👗</span>
-                    <span>Gele (Head Wrap)</span>
+                  <label htmlFor="email" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                    <MailIcon className="w-5 h-5 text-yellow-500" />
+                    <span>Email *</span>
                   </label>
                   <input
-                    type="number"
-                    id="gele"
-                    name="gele"
-                    value={formData.gele}
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleInputChange}
                     // required
-                    min={1}
-                    max={30}
-                    autoComplete='off'
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-                    placeholder="Women's headgear (Gele)"
+                    placeholder="johndoe@gmail.com"
                   />
                 </div>
-              </div>
-              <div className='text-sm text-gray-800 mt-2'>Delivery of materials will come with extra cost: for further details call <a href="tel:+2349058936016" className='font-semibold'>(+234) 9058936016</a> or <a href="tel:+2348025893272" className='font-semibold'>(+234) 8025893272</a></div>
-            </div>
 
-            <div className='max-xxs:text-base'>
-              <label htmlFor="guests" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
-                <Users className="w-5 h-5 text-yellow-500" />
-                <span>Number of Guests (including yourself) *</span>
-              </label>
-              <select
-                id="guests"
-                name="guests"
-                value={formData.guests}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
-              >
+                <div className="flex flex-col">
+                  <div className="flex items-center border-b pb-4 space-x-2 text-gray-700 font-medium mb-3">
+                    <Shirt className="w-5 h-5 text-yellow-500" />
+                    <span>Outfit Materials (Color code: Pink & White) *</span>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="fila" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                        <span className="w-5 h-5 text-yellow-500">👔</span>
+                        <span>Fila (Traditional Cap)</span>
+                      </label>
+                      <input
+                        type="number"
+                        id="fila"
+                        name="fila"
+                        value={formData.fila}
+                        onChange={handleInputChange}
+                        // required
+                        min={1}
+                        max={30}
+                        autoComplete='off'
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                        placeholder="Men's cap (Fila)"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="gele" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                        <span className="w-5 h-5 text-yellow-500">👗</span>
+                        <span>Gele (Head Wrap)</span>
+                      </label>
+                      <input
+                        type="number"
+                        id="gele"
+                        name="gele"
+                        value={formData.gele}
+                        onChange={handleInputChange}
+                        // required
+                        min={1}
+                        max={30}
+                        autoComplete='off'
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                        placeholder="Women's headgear (Gele)"
+                      />
+                    </div>
+                  </div>
+                  <div className='text-sm text-gray-800 mt-2'>Delivery of materials will come with extra cost: for further details call <a href="tel:+2349058936016" className='font-semibold'>(+234) 9058936016</a> or <a href="tel:+2348025893272" className='font-semibold'>(+234) 8025893272</a></div>
+                </div>
+
+                <div className='max-xxs:text-base'>
+                  <label htmlFor="guests" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                    <Users className="w-5 h-5 text-yellow-500" />
+                    <span>Number of Guests (including yourself) *</span>
+                  </label>
+                  <select
+                    id="guests"
+                    name="guests"
+                    value={formData.guests}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200"
+                  >
+                    {
+                      flaggedFingerprints?.includes(deviceFingerprint!) ?
+                      [...Array(adminCount).keys()].map((_, i) => (
+                        <option 
+                        key={i}
+                        value={i+1}>{i+1} {(i+1) === 1 ? 'Guest' : 'Guests'}</option>
+                      ))
+                      :
+                      [...Array(regularCount).keys()].map((_, i) => (
+                        <option 
+                        key={i}
+                        value={i+1}>{i+1} {(i+1) === 1 ? 'Guest' : 'Guests'}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+
+                <div className='max-xxs:text-base'>
+                  <label htmlFor="message" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
+                    <MessageSquare className="w-5 h-5 text-yellow-500" />
+                    <span>Special Message (Optional)</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200 resize-none"
+                    placeholder="Share your excitement, dietary restrictions, or any special notes..."
+                  />
+                </div>
+
                 {
-                  flaggedFingerprints?.includes(deviceFingerprint!) ?
-                  [...Array(adminCount).keys()].map((_, i) => (
-                    <option 
-                    key={i}
-                    value={i+1}>{i+1} {(i+1) === 1 ? 'Guest' : 'Guests'}</option>
-                  ))
-                  :
-                  [...Array(regularCount).keys()].map((_, i) => (
-                    <option 
-                    key={i}
-                    value={i+1}>{i+1} {(i+1) === 1 ? 'Guest' : 'Guests'}</option>
-                  ))
+                  appState.error?.length > 1
+                  ? <p className="text-red-500 text-sm">The following input(s) are required <strong>{appState.error}</strong></p> 
+                  : null
                 }
-              </select>
-            </div>
 
-            <div className='max-xxs:text-base'>
-              <label htmlFor="message" className="flex items-center space-x-2 text-gray-700 font-medium mb-3">
-                <MessageSquare className="w-5 h-5 text-yellow-500" />
-                <span>Special Message (Optional)</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={4}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:border-yellow-400 focus:outline-none transition-colors duration-200 resize-none"
-                placeholder="Share your excitement, dietary restrictions, or any special notes..."
-              />
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    disabled={!canSubmit || isLoading}
+                    className={`inline-flex items-center space-x-3 disabled:bg-yellow-800 ${canSubmit ? 'bg-gradient-to-r from-yellow-400 to-yellow-500' : ''} text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg`}
+                  >
+                    <Send className="w-6 h-6" />
+                    <span>Send RSVP</span>
+                    {isLoading ? <LoaderIcon className='animate-spin duration-300 transition-all' /> : null}
+                  </button>
+                </div>
+              </form>
             </div>
-
-            {
-              appState.error?.length > 1
-              ? <p className="text-red-500 text-sm">The following input(s) are required <strong>{appState.error}</strong></p> 
-              : null
-            }
-
-            <div className="text-center">
-              <button
-                type="submit"
-                disabled={!canSubmit || isLoading}
-                className={`inline-flex items-center space-x-3 disabled:bg-yellow-800 ${canSubmit ? 'bg-gradient-to-r from-yellow-400 to-yellow-500' : ''} text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg`}
-              >
-                <Send className="w-6 h-6" />
-                <span>Send RSVP</span>
-                {isLoading ? <LoaderIcon className='animate-spin duration-300 transition-all' /> : null}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
+          </div>
+        </section>
+      ) : null
+    }
+    </>
   );
 };
 
